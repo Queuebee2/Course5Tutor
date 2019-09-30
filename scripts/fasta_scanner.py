@@ -1,11 +1,22 @@
+# purpose: to analyse simple textfiles and create quick graphs, for now.
+#
+#
+#
 
+#imports
 from matplotlib import pyplot as plotter
 import os
+
+# lets be nice to all OS users (this might hurt in the near upcoming future)
 path_delim = os.sep
 
-IN_FILE = "in_data"+path_delim+"uniprot_thioredoxin_reviewed.fasta"
+# directory paths (relative to script if ran as main)
+OUT_DIR = "out_data"
+IN_DIR = "in_data"
 
-original_names = open("original_names.txt", 'a')
+# set file here, todo: adapt to run through multiple files.
+IN_FILE = IN_DIR+path_delim+"uniprot_thioredoxin_reviewed.fasta"
+
 
 """ helper functions """
 
@@ -23,8 +34,9 @@ def scanFileFor(filepath, term):
                 count+=1
     return count
 
-def add():
+def addSomeValueToSomeTextfileAtSomePlace(textfile, val, place):
     # placeholder to add a value in a textfile at a certain line
+    #idk
     pass
 
 
