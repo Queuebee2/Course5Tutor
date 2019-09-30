@@ -10,9 +10,11 @@ bevinden worden gevisualiseerd in een histogram.
 
 # Hier worden packages geïmporteerd.
 import re
+import os
 import numpy as np
 import matplotlib.pyplot as plt
 
+OS_SEP = os.sep
 
 class VerkrijgGegevens:
 
@@ -196,7 +198,7 @@ class Histogram:
 
 def main():
     # De locatie van het te visualiseren bestand.
-    loc_best = '/home/demivdpasch/Documents/Course 5/muscle_reviewed'
+    loc_best = 'in_data'+OS_SEP+muscle_reviewed'
 
     # Hier worden classes aangeroepen.
     vg = VerkrijgGegevens(loc_best)
