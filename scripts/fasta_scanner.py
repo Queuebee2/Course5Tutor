@@ -60,6 +60,8 @@ def main():
     # uncomment the commented section in the file loop.
     dontDoTooMuch = 0
 
+
+    # set global IN_FILE at top of script pls
     with open(IN_FILE, 'r') as f:
         PEs = 0 
         for l in f:
@@ -89,11 +91,11 @@ def main():
 
                 
         
+    printDict(interestingTerms)
+    pieGraphDict(interestingTerms)
+    printDict(OSes)
+    pieGraphDict(OSes)
 
-printDict(interestingTerms)
-pieGraphDict(interestingTerms)
-printDict(OSes)
-pieGraphDict(OSes)
 
 main()
 
