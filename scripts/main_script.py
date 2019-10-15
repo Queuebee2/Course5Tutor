@@ -6,7 +6,7 @@ from bioservices import UniProt
 from DbConnector import DbConnector
 
 
-def create_msa_mafft(fasta_filename, msa_destination_filename):
+def create_msa_mafft(fasta_filename, msa_destination_filename, verbose=False):
     """calls 'mafft' through the shell to create a
        multiple sequence alignment (msa_filename)
 
@@ -27,10 +27,11 @@ def create_msa_mafft(fasta_filename, msa_destination_filename):
     else:
         cmd = "mafft " + fasta_filename + " > " + msa_destination_filename
         e = subprocess.check_call(cmd, shell=True)
+        if verbose:  print(e)
     return
 
 
-def create_hmm(msa_filename, hmm_destination_filename):
+def create_hmm(msa_filename, hmm_destination_filename, verbose=False):
     """calls 'hmmbuild' through the shell to create a hmm profile
        from a multiple sequence alignment (msa_filename)
 
@@ -52,6 +53,7 @@ def create_hmm(msa_filename, hmm_destination_filename):
     else:
         cmd = "hmmbuild " + hmm_destination_filename + " " + msa_filename
         e = subprocess.check_call(cmd, shell=True)
+        if verbose:  print(e)
     return
 
 def search_uniprot(uniprot_handle, uniprot_entry_id, columns, verbose=False):
