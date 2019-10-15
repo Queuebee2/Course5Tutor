@@ -1,0 +1,5 @@
+HOST_DEFAULT = ""
+USER_DEFAULT = ""
+DATABASE_DEFAULT = ""
+joke = ""
+
