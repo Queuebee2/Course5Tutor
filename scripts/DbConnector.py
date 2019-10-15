@@ -6,8 +6,14 @@
 import mysql.connector
 from base64 import b64decode as magic_wizardry
 
+
 # load basic credentials (add DbCreds to .gitignore!!!!!!!!)
-from DbCreds import HOST_DEFAULT, USER_DEFAULT, DATABASE_DEFAULT
+try:
+    from DbCreds import HOST_DEFAULT, USER_DEFAULT, DATABASE_DEFAULT
+except ModuleNotFoundError:
+    raise ModuleNotFoundError ("It seems there is no DbCreds.py file"+
+                               " available. Try creating it manually,") 
+                            
 
 GLOBAL_FIREBALL = False # we need a fireball, conjured by a magician.
                         # keep False unless the secret has been revealed.
