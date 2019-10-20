@@ -1,2 +1,3 @@
 scripts/DbCreds.py
 .idea/*
+*/__pycache__/*
