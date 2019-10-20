@@ -65,6 +65,35 @@ class DbConnector():
         # not sure if/where/why needed.
         pass
 
+
+    def update_row(self, table, ID, columns_values):
+        """ update a row """
+
+        list_of_set_strings = []
+
+
+
+        for col, val in columns_values.items():
+            # replace None with 'NULL'
+            if val == None:
+                val = 'NULL'
+            # put single quotes around string values
+# TODO check whether this will work with strings that contain quotes already
+            elif type(val) == str:
+                val = '\'' + val + '\''
+            set_col = f' `{col}` = {val} '
+            list_of_set_strings.append(set_col)
+
+        # separate each column=val SET with commas.
+        set_string = ",".join(list_of_set_strings)
+
+        # fill in the blanks in the string we use as a query
+        update_query = f"""UPDATE {table} SET {set_string} WHERE id = {ID}"""
+
+        print(update_query)
+        self.cursor.execute(update_query)
+        self.connection.commit()
+                 
     def insert(self, query, values):
         """
         a simple SQL insert values into the connected database
