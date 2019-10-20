@@ -58,6 +58,13 @@ class DbConnector():
 
             
             
+    def exists(self, protein):
+#!TODO  hardcode SELECT to check if a protein already exists
+        # in our database based on duplicate sequence OR
+        # sp/NP/PDB identifier....
+        # not sure if/where/why needed.
+        pass
+
     def insert(self, query, values):
         """
         a simple SQL insert values into the connected database
