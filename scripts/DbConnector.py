@@ -105,7 +105,8 @@ class DbConnector():
             [000000, 000000, 000000, 00000]
         
         """
-        
+
+        print('trying to exec', query, values)
         self.cursor.execute(query, values)
         self.connection.commit()
         print(self.cursor.rowcount, 'record inserted')
