@@ -50,7 +50,7 @@ class DbConnector():
 #!TODO  add parameter to set table
         default_table = "PROTEIN"
         
-        self.cursor.execute("SELECT * FROM " + default_table + " LIMIT " + str(limit +";"))
+        self.cursor.execute("SELECT * FROM " + default_table + " LIMIT " + str(limit) +";")
 
         results = self.cursor.fetchall()
 
