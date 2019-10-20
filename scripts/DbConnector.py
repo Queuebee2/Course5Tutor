@@ -66,7 +66,7 @@ class DbConnector():
         pass
 
 
-    def update_row(self, table, ID, columns_values):
+    def update_row(self, table, ID, columns_values, verbose=False):
         """ update a row """
 
         list_of_set_strings = []
@@ -90,7 +90,7 @@ class DbConnector():
         # fill in the blanks in the string we use as a query
         update_query = f"""UPDATE {table} SET {set_string} WHERE id = {ID}"""
 
-        print(update_query)
+        if verbose: print(update_query)
         self.cursor.execute(update_query)
         self.connection.commit()
                  
