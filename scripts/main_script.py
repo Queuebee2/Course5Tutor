@@ -144,7 +144,7 @@ def main():
                     sequence += line
 
         
-        # find GO terms and other traits for each protein
+        # find GO terms and other traits for each protein here or in loop?
 
 
 
