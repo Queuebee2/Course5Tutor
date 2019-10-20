@@ -183,4 +183,4 @@ class NoJokeError(Exception):
 if __name__ == '__main__':
     app = DbConnector()
 else:
-    print('imported db_insert')
+    print('imported DbConnector')
