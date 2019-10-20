@@ -117,6 +117,10 @@ class DbConnector():
         # add another function to return string query from**kwargs
         # this could be done like ``self.Query_id = blastresult[0]``
 
+    def commit_query(self, query):
+        """speaks for itself doesn't it"""
+        self.cursor.execute(query)
+        self.connection.commit()
 
     def insert_many_to_many(self, table_value_dict):
         """
