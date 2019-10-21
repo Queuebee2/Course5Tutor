@@ -126,7 +126,12 @@ def main():
                         # PDB 	            pdb|entry|chain         ''
                         # Refseq protein    >NP_id                  https://www.ncbi.nlm.nih.gov/books/NBK50679/
                         
+                        #regular expressions:
+                        #Regex ^sp|.*|.*
+                        #^Pdb|.*|.*
+                        #^>[AaRrNnDdCcFfQqEeGgHhIiLlKkMmPpSsTtWwYyVv]*$ of “else” als we zeker weten dat het 1 van de 3 is.
 
+                    
                         # check if it already exists in our database (?? will this be costly?)
 
                         # Do we care about redundant sequences?
