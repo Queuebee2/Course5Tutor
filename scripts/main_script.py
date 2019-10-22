@@ -107,6 +107,8 @@ def main():
         blast_results = 'filename_of_fasta_witha_all_results'
 
         # that determines how we loop over the sequences (to find their ID's)
+
+        #wrap this
         with open(blast_results, 'r') as file:
 
             # Assume fasta starts with >
@@ -115,6 +117,7 @@ def main():
             assert header.startswith(">"), "file not properly Fasta Formatted"
 
             sequence = ''
+            # wrap this
             for l in file:
                 line = l.strip("\n")
                 if line.startswith(">"):
@@ -122,6 +125,7 @@ def main():
                         
                         
 # TODO                  detect which database it comes from?        https://en.wikipedia.org/wiki/FASTA_format#NCBI_identifiers    
+# SCRAP TODO            just dump first part of header in db?
                         # SWISS-PROT 	    sp|accession|name       ''
                         # PDB 	            pdb|entry|chain         ''
                         # Refseq protein    >NP_id                  https://www.ncbi.nlm.nih.gov/books/NBK50679/
