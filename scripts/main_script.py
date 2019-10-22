@@ -1,11 +1,47 @@
 from sys import argv
 import subprocess
 import os.path
+import re
 
 from bioservices import UniProt
 from DbConnector import DbConnector
 
+#important globals
 
+# regex object used in find_target_pattern(string):
+TARGET_PATTERN = re.compile('.[C]..[C].')
+
+
+# custom errors
+class TooManyError(Exception):
+    """When there's too much of something"""
+    def __init__(self, message="Too many. That was unexpected!"):
+        super().__init__(message)
+
+
+# helper functions
+def find_target_pattern(string):
+    """ Uses a regex object to find all occurences of
+        a pattern within a string.
+
+        The purpose (at this moment) is to only
+        return values when only one unique match is found.
+
+        An error will be raised when more than 1 match is found
+    """
+    # set TARGET_PATTERN as global re.compile('regexstring')
+    matches = TARGET_PATTERN.findall(string)
+   
+    if matches:
+        match_amt = len(matches)
+        if match_amt > 1:
+            raise TooManyError
+        elif match_amt == 1:
+            match = matches[0]
+            return match
+    else:
+        return None
+        
 def create_msa_mafft(fasta_filename, msa_destination_filename, verbose=False):
     """calls 'mafft' through the shell to create a
        multiple sequence alignment (msa_filename)
@@ -29,7 +65,6 @@ def create_msa_mafft(fasta_filename, msa_destination_filename, verbose=False):
         e = subprocess.check_call(cmd, shell=True)
         if verbose:  print(e)
     return
-
 
 def create_hmm(msa_filename, hmm_destination_filename, verbose=False):
     """calls 'hmmbuild' through the shell to create a hmm profile
