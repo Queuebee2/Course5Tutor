@@ -18,7 +18,7 @@ except ModuleNotFoundError:
 GLOBAL_FIREBALL = False # we need a fireball, conjured by a magician.
                         # keep False unless the secret has been revealed.
 
-
+DEFAULT_TABLE = 'PROTEIN'
 
 class DbConnector():
     """ An object to help communicate with a (my)SQL Database"""
@@ -48,7 +48,7 @@ class DbConnector():
         """ hardcoded select to just select current results"""
 
 #!TODO  add parameter to set table
-        default_table = "PROTEIN"
+        default_table = DEFAULT_TABLE
         
         self.cursor.execute("SELECT * FROM " + default_table + " LIMIT " + str(limit) +";")
 
@@ -56,8 +56,6 @@ class DbConnector():
 
         return results
 
-            
-            
     def exists(self, protein):
 #!TODO  hardcode SELECT to check if a protein already exists
         # in our database based on duplicate sequence OR
@@ -99,7 +97,7 @@ class DbConnector():
         a simple SQL insert values into the connected database
         
         example query:
-           "insert into PROTEIN (id, MSA_id, length, header)"
+           "insert into TABLENAME (id, MSA_id, length, header)"
 
         example values:
             [000000, 000000, 000000, 00000]
