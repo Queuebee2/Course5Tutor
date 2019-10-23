@@ -11,6 +11,9 @@ from DbConnector import DbConnector
 # regex object used in find_target_pattern(string):
 TARGET_PATTERN = re.compile('.[C]..[C].')
 
+FASTA_FILENAME = 'fasta.fa'
+MSA_FILENAME = 'msa.msa'
+HMM_FILENAME = 'hmm.hmm'
 
 # custom errors
 class TooManyError(Exception):
