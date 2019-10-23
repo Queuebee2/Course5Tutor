@@ -168,6 +168,19 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
 # could just do an insert with columns=columns, values=search_result.split
 
 #TODO SQL insert here
+def doBlast(filename=BLAST_OUTPUT , **kwargs):
+    # take a sequence to exec5ute a blastn against the nt database
+    # to do : add blasttype, db and matrix parameters
+
+    # open output file
+    blast_file = open(filename, 'w')
+
+    # execute blast
+    result_handle = NCBIWWW.qblast(**kwargs)
+
+    # write results ( xml-string )
+    blast_file.write(result_handle.read())
+    
 
 
 def main():
