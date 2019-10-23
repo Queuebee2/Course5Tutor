@@ -21,6 +21,18 @@ class TooManyError(Exception):
     def __init__(self, message="Too many. That was unexpected!"):
         super().__init__(message)
 
+class InvalidIdError(Exception):
+    """When using an identifier yield unexpected results"""
+    def __init__(self, message="That ID can't be found or doesn't exist"):
+        super().__init__(message)
+
+class UrgentUnknownError(Exception):
+    """When I dont know what in fruits name happened"""
+    def __init__(self, message):
+        message = "CALL HELP IMMEDIATELY " + message
+        super().__init__(message)
+
+
 
 # helper functions
 def find_target_pattern(string):
@@ -101,6 +113,53 @@ def search_uniprot(uniprot_handle, uniprot_entry_id, columns, verbose=False):
         print("searched", uniprot_entry_id)
 
 
+def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
+    """should return the header+sequence of a swissprot entry in
+       fasta format, but otherwise lets you know it didn't.
+
+    arguments
+    uniprot_handle: bioservices.Uniprot object to execute the fetch
+
+    acession: str (preferrably), can be a list too. Let's keep it
+              the way bioservices had it made. very convenient.
+
+    returns: str containing a fasta file for max 1 entry
+
+    throws: all kinds of errors. Wrong id error, too many
+            (unexpected result) errors,
+            400, 404 errors.
+            UnknownError s.
+
+    
+    """
+    fasta_str = uniprot_handle.retrieve(acession, frmt='fasta')
+    if verbose: print('got a fasta from', acession)
+    print(fasta_str)
+    if type(fasta_str) == str:
+        # sometimes this dumb retrieve func returns just 1 string,
+        # the fasta itself. This is the expected result
+        return fasta_str
+    
+    elif type(fasta_str) == list:
+        # but then, sometimes, like if you accidentally were to give it 2
+        # acession identifiers, it would return a list of fasta strings.
+        raise TooManyError('fetch_fasta returned too many fasta strings!')
+    
+    elif (fasta_str == '404') or (fasta_str == 404):
+        # then if an id returns a 404 page, it just returns '404'
+        # so that's really convenient, too, yes.
+        raise InvalidIdError(str(acession) + " yields a 404 error!")
+
+    elif (fasta_str == '400') or (fasta_str == 400):
+        # oh apparently something can cause it to return a 400 error too
+        raise InvalidIdError(str(acession) + " yields a 400 error!")
+    else:
+        # gosh darnit
+        raise UrgentUnknownError('type fasta_str:' + str(type(fasta_str)) +
+                                 ' acession id:' + str(acession))
+        
+
+    
 #TODO parse search_result here (not really needed probably)
 # could just do an insert with columns=columns, values=search_result.split
 
