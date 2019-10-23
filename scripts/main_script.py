@@ -9,7 +9,7 @@ from DbConnector import DbConnector
 #important globals
 
 # regex object used in find_target_pattern(string):
-TARGET_PATTERN = re.compile('.[C]..[C].')
+TARGET_PATTERN = re.compile('[C]..[C]')
 
 FASTA_FILENAME = 'fasta.fa'
 MSA_FILENAME = 'msa.msa'
