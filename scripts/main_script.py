@@ -14,6 +14,10 @@ TARGET_PATTERN = re.compile('[C]..[C]')
 FASTA_FILENAME = 'fasta.fa'
 MSA_FILENAME = 'msa.msa'
 HMM_FILENAME = 'hmm.hmm'
+BLAST_OUTPUT = 'blast_output.xml'
+
+#
+PROTEIN_SYMBOLS = 'ACDEFGHIKLMNPQRSTVWYadefghiklmnpqrstvwy'
 
 # custom errors
 class TooManyError(Exception):
