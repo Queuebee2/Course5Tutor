@@ -213,63 +213,21 @@ def main():
         # hmm
         create_hmm(msa_filename, hmm_destination_filename)
 
-        # doBlast/search/jackhmmer/PSI/PHI ??????????
-# TODO  find solution
+        # hmm search
 
-        # will the format be
-        blast_results = ['file','names']
-        #or
-        blast_results = 'filename_of_fasta_witha_all_results'
+#TODO
 
-        # that determines how we loop over the sequences (to find their ID's)
-
-        #wrap this
-        with open(blast_results, 'r') as file:
-
-            # Assume fasta starts with >
-            header = file.readline()
-            # check if that assumption was true.
-            assert header.startswith(">"), "file not properly Fasta Formatted"
-
-            sequence = ''
-            # wrap this
-            for l in file:
-                line = l.strip("\n")
-                if line.startswith(">"):
-                    if header != '':
-                        
-                        
-# TODO                  detect which database it comes from?        https://en.wikipedia.org/wiki/FASTA_format#NCBI_identifiers    
-# SCRAP TODO            just dump first part of header in db?
-                        # SWISS-PROT 	    sp|accession|name       ''
-                        # PDB 	            pdb|entry|chain         ''
-                        # Refseq protein    >NP_id                  https://www.ncbi.nlm.nih.gov/books/NBK50679/
-                        
-                        #regular expressions:
-                        #Regex ^sp|.*|.*
-                        #^Pdb|.*|.*
-                        #^>[AaRrNnDdCcFfQqEeGgHhIiLlKkMmPpSsTtWwYyVv]*$ of “else” als we zeker weten dat het 1 van de 3 is.
-
-                    
-                        # check if it already exists in our database (?? will this be costly?)
-
-                        # Do we care about redundant sequences?
-                        # Proposal: remove junction table and add 3 db-id columns to
-                        # primary database table 
-                        # https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5225397/
-                        # http://weizhongli-lab.org/cd-hit/
-
-
-                    # prep loop for next sequence
-                    header = line
-                    sequence = ''
-
-                else:
-                    sequence += line
-
+        # iterate hmm search results
+            # select * from protein where id = id
+            # if select yields results: skip
+            # else:
+                # find 2c pattern with regex
+                # fetch GO terms
+                # (not sure this is necessary ) - get whole fasta
+                # guess it is, since we need to add to main fasta
+                # insert into db
         
-        # find GO terms and other traits for each protein here or in loop?
-
+        # repeat?
 
 
 if __name__ == "__main__":
