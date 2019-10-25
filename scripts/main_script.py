@@ -143,7 +143,6 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     return
 
 
-# deprecated, since we have a database file locally now -_-
 def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
     """should return the header+sequence of a swissprot entry in
        fasta format, but otherwise lets you know it didn't.
@@ -193,7 +192,11 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
 
 def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
                       verbose=False):
-    """ """
+    """ TODO DOCSTRING
+        in goes a Uniprot object from bioservices along with a
+        swissprot id and a list of expected columns
+
+        """
     
     result = uniprot_handle.search(acession, columns=",".join(columns_list))
 
@@ -212,6 +215,16 @@ def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
         
     return column_value_dict
 
+
+
+
+def make_obscure_SQL_part(d):
+    """ takes a dictionary and puts the value in the right order
+        based on the order of keys in the database
+        with quotes so it can be entered as a string/text in a sql insert"""
+    keys_in_order = [k for k in DEFAULT_SELECTION]
+    return "'" + "','".join([d[k] for k in keys_in_order]) + "'"
+        
 
 def main():
 
@@ -233,6 +246,7 @@ def main():
     # having more than 50% of results be results we already
     # found
     running = True
+    iteration = 0 # TODO function to get iteration from db
         
     # 'running' loop
     while running:
@@ -248,15 +262,27 @@ def main():
 #TODO
 
         # iterate hmm search results
-            # find out what the id is
+            # find out what the acession id is
             # "SELECT * FROM PROTEIN WHERE ID = '{}'".format(id)
             # if select yields results: skip
             # else:
-                # find_target_pattern(sequence:str)
-                # get_uniprot_stuff(uniprot_handle, acession)
-                # (not sure this is necessary ) - get whole fasta
+                # (not sure this is necessary ) - get whole fasta sequence
                 # guess it is, since we need to add to main fasta
+                # fetch_fasta_from_uniprot(uniprot_handle, acession)
+                
+                # pos_2c = find_target_pattern(sequence:str)
+                # GO_STUFF_D = get_uniprot_stuff(uniprot_handle, acession)
+
+                # obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
                 # INSERT INTO PROTEIN VALUES (VALUES)
+    """INSERT INTO protein VALUES (NULL, # null id autoincrement
+                            'testheader',  # text
+                            'tesequence',  # text
+                            0,  # int iteration
+                            'testgobioprocesstext', 
+                            'testgocellcomptext',
+                            'tesgomolfunctext',
+                            1337); # int pos2_c """ 
         
         # repeat?
 
