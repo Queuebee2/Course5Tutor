@@ -143,17 +143,6 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     return
 
 
-def search_uniprot(uniprot_handle, uniprot_entry_id, columns, verbose=False):
-
-    search_result = uniprot_handle.search(uniprot_entry_id, columns=columns)
-    if verbose:
-        print("searched", uniprot_entry_id)
-
-#TODO parse search_result here (not really needed probably)
-# could just do an insert with columns=columns, values=search_result.split
-
-#TODO SQL insert here
-
 # deprecated, since we have a database file locally now -_-
 def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
     """should return the header+sequence of a swissprot entry in
@@ -259,11 +248,12 @@ def main():
 #TODO
 
         # iterate hmm search results
+            # find out what the id is
             # "SELECT * FROM PROTEIN WHERE ID = '{}'".format(id)
             # if select yields results: skip
             # else:
                 # find_target_pattern(sequence:str)
-                # fetch GO terms
+                # get_uniprot_stuff(uniprot_handle, acession)
                 # (not sure this is necessary ) - get whole fasta
                 # guess it is, since we need to add to main fasta
                 # INSERT INTO PROTEIN VALUES (VALUES)
