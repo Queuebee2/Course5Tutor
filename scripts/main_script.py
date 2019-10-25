@@ -16,8 +16,9 @@ FASTA_FILENAME = 'fasta.fa'
 MSA_FILENAME = 'msa.msa'
 HMM_FILENAME = 'hmm.hmm'
 BLAST_OUTPUT = 'blast_output.xml'
+FASTA_DATABASE = 'not set'
 
-#
+
 
 # custom errors
 class TooManyError(Exception):
@@ -61,7 +62,8 @@ def find_target_pattern(string):
     else:
         return None
         
-def create_msa_mafft(fasta_filename, msa_destination_filename, verbose=False):
+def create_msa_mafft(fasta_filename=FASTA_FILENAME,
+                     msa_destination_filename=MSA_FILENAME, verbose=False):
     """calls 'mafft' through the shell to create a
        multiple sequence alignment (msa_filename)
 
@@ -85,7 +87,8 @@ def create_msa_mafft(fasta_filename, msa_destination_filename, verbose=False):
         if verbose:  print(e)
     return
 
-def create_hmm(msa_filename, hmm_destination_filename, verbose=False):
+def create_hmm(msa_filename=MSA_FILENAME,
+               hmm_destination_filename=HMM_FILENAME, verbose=False):
     """calls 'hmmbuild' through the shell to create a hmm profile
        from a multiple sequence alignment (msa_filename)
 
@@ -110,6 +113,34 @@ def create_hmm(msa_filename, hmm_destination_filename, verbose=False):
         if verbose:  print(e)
     return
 
+def do_hmm_search(hmm_filename=HMM_FILENAME,
+                  fasta_database=FASTA_DATABASE, verbose=False):
+    """calls 'hmmsearch' through the shell to ty and
+       create a  TODO <whatever the format is>
+       by performing a hmmsearch on a database file
+
+    ARGS:
+        hmm_filename: string
+            relative path (just a filename) of
+            a file containing a valid profile HMM
+
+        fasta_database: string
+            relative path to a (fasta) database file
+            examples @ https://www.uniprot.org/downloads
+
+    """
+
+    # Check whether hmm has already been made
+    if os.path.isfile(hmm_filename):
+        pass
+    # Execute command if hmm hasn't been made before
+    else:
+        cmd = "hmmsearch " + hmm_filename + " " + fasta_database
+        e = subprocess.check_call(cmd, shell=True)
+        if verbose:  print(e)
+    return
+
+
 def search_uniprot(uniprot_handle, uniprot_entry_id, columns, verbose=False):
 
     search_result = uniprot_handle.search(uniprot_entry_id, columns=columns)
@@ -121,7 +152,7 @@ def search_uniprot(uniprot_handle, uniprot_entry_id, columns, verbose=False):
 
 #TODO SQL insert here
 
-
+# deprecated, since we have a database file locally now -_-
 def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
     """should return the header+sequence of a swissprot entry in
        fasta format, but otherwise lets you know it didn't.
@@ -168,19 +199,6 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
                                  ' acession id:' + str(acession))
 
 
-def doBlast(filename=BLAST_OUTPUT , **kwargs):
-    # take a sequence to exec5ute a blastn against the nt database
-    # to do : add blasttype, db and matrix parameters
-
-    # open output file
-    blast_file = open(filename, 'w')
-
-    # execute blast
-    result_handle = NCBIWWW.qblast(**kwargs)
-
-    # write results ( xml-string )
-    blast_file.write(result_handle.read())
-    
 
 
 
@@ -198,40 +216,40 @@ def main():
         # check validity
         # combine multiple fasta's into one for msa
 
-
-# TODO replace this with if files > 0
-    if 0 != 1:
-        running = True
-
+    
+    # set main loop condition
+    # this could be NOT running out of results or
+    # having more than 50% of results be results we already
+    # found
+    running = True
         
     # 'running' loop
     while running:
         
         # msa
-        create_msa_mafft(fasta_filename, msa_destination_filename)
+        create_msa_mafft()
 
         # hmm
-        create_hmm(msa_filename, hmm_destination_filename)
+        create_hmm()
 
         # hmm search
-
+        do_hmm_search()
 #TODO
 
         # iterate hmm search results
-            # select * from protein where id = id
+            # "SELECT * FROM PROTEIN WHERE ID = '{}'".format(id)
             # if select yields results: skip
             # else:
                 # find 2c pattern with regex
                 # fetch GO terms
                 # (not sure this is necessary ) - get whole fasta
                 # guess it is, since we need to add to main fasta
-                # insert into db
+                # INSERT INTO PROTEIN VALUES (VALUES)
         
         # repeat?
 
 
 if __name__ == "__main__":
     print('running from main')
-    
     main()
 
