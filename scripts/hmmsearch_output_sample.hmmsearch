@@ -1,0 +1,697 @@
+# hmmsearch :: search profile(s) against a sequence database
+# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# Copyright (C) 2015 Howard Hughes Medical Institute.
+# Freely distributed under the GNU General Public License (GPLv3).
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+# query HMM file:                  hmm_file.hmm
+# target sequence database:        /home/queue/SwissProt/uniprot_trembl.fasta.gz
+# output directed to file:         hmmsearch_output.hmm
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Query:       msa_file  [M=141]
+Scores for complete sequences (score includes all domains):
+   --- full sequence ---   --- best 1 domain ---    -#dom-
+    E-value  score  bias    E-value  score  bias    exp  N  Sequence                       Description
+    ------- ------ -----    ------- ------ -----   ---- --  --------                       -----------
+   3.5e-142  480.4  43.0    2.5e-15   69.3   0.9    9.1  9  tr|A0A388KGT8|A0A388KGT8_CHABU  Uncharacterized protein OS=Chara
+   5.4e-109  372.9  36.9    2.6e-10   53.1   0.8    8.1  8  tr|A0A0L0GD07|A0A0L0GD07_9EUKA  Uncharacterized protein OS=Sphae
+   1.3e-105  361.9   0.0    1.6e-13   63.5   0.0    7.1  7  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA  Uncharacterized protein OS=Achly
+   1.5e-103  355.3  38.7    2.4e-13   62.8   0.2    9.0  8  tr|T2MDU2|T2MDU2_HYDVU          Protein disulfide-isomerase A5 O
+   1.8e-102  351.7  25.4    1.2e-08   47.7   0.0   10.2  9  tr|F0VDF8|F0VDF8_NEOCL          Thioredoxin-like protein OS=Neos
+    6.1e-97  333.8  33.2    2.2e-14   66.2   0.0    8.0  7  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID  Uncharacterized protein OS=Pocil
+    5.7e-95  327.4  40.6    1.3e-13   63.8   0.3   12.5  8  tr|A0A1J1I965|A0A1J1I965_9DIPT  CLUMA_CG009948, isoform B OS=Clu
+    1.5e-94  326.0  41.8    1.3e-13   63.8   0.2   12.5  8  tr|A0A1J1ICW5|A0A1J1ICW5_9DIPT  CLUMA_CG009948, isoform A OS=Clu
+    7.8e-87  301.1   1.0    2.5e-15   69.3   0.0    6.1  6  tr|A0A067CMT1|A0A067CMT1_SAPPC  Uncharacterized protein OS=Sapro
+    2.8e-86  299.3   0.1    1.2e-14   67.1   0.0    6.1  6  tr|T0Q3S3|T0Q3S3_SAPDV          Uncharacterized protein OS=Sapro
+    6.3e-86  298.1   0.1    8.8e-15   67.5   0.0    6.1  6  tr|T0REM9|T0REM9_SAPDV          Uncharacterized protein OS=Sapro
+    6.7e-86  298.0   1.1    2.5e-15   69.3   0.0    6.1  6  tr|A0A067CS62|A0A067CS62_SAPPC  Uncharacterized protein OS=Sapro
+	
+	
+	
+Domain annotation for each sequence (and alignments):
+>> tr|A0A388KGT8|A0A388KGT8_CHABU  Uncharacterized protein OS=Chara braunii OX=69332 GN=CBR_g3892 PE=3 SV=1
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   50.6   0.0   3.2e-12   1.5e-09      38     130 ..      34     126 ..      22     150 .. 0.82
+   2 !   47.8   0.2   2.3e-11   1.1e-08      35     123 ..     176     265 ..     139     295 .. 0.81
+   3 !   50.8   0.2   2.7e-12   1.3e-09      36     123 ..     305     392 ..     283     419 .. 0.81
+   4 !   52.7   0.3   7.1e-13   3.4e-10      38     130 ..     433     525 ..     395     557 .. 0.80
+   5 !   52.3   0.6     9e-13   4.3e-10      38     125 ..     560     647 ..     530     677 .. 0.81
+   6 !   61.1   0.7   1.8e-15   8.8e-13      35     131 ..     685     781 ..     655     795 .. 0.84
+   7 !   66.4   0.7     4e-17   1.9e-14      35     126 ..     812     903 ..     786     933 .. 0.78
+   8 !   69.3   0.9   5.2e-18   2.5e-15      35     126 ..     940    1031 ..     916    1062 .. 0.79
+   9 !   55.5   1.1   9.2e-14   4.4e-11      35     126 ..    1068    1159 ..    1045    1206 .. 0.82
+
+  Alignments for each domain:
+  == domain 1  score: 50.6 bits;  conditional E-value: 3.2e-12
+                        msa_file  38 deelqtaladakgkpvvldfwaswCgpCkevepdleelakky.sdav.vflkvdvdendmelakelnvsgvPtflfdkd 114
+                                     d++++++++++ gk+  ++f+a+wCg+C+ ++p  ++l++ + +d++ ++++vd + + ++ + + +++g+Pt+ ++ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU  34 DKNFDEQVKAD-GKLWFIKFFAPWCGHCMRLAPGWKDLSQILaEDPIiRIAHVDCTTD-KDTCTKHGIRGYPTMKVFYN 110
+                                     57899999888.8***************************663445449*****9999.99**************7779 PP
+
+                        msa_file 115 gkviarivGavdaell 130
+                                     g+ ++ + G  d e l
+  tr|A0A388KGT8|A0A388KGT8_CHABU 111 GEFLEGYNGDRDVESL 126
+                                     9999888775544444 PP
+
+  == domain 2  score: 47.8 bits;  conditional E-value: 2.3e-11
+                        msa_file  35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflf 111
+                                     +  d++++++++++++ +  ++f+a+wCg+C+e++p+ ++l++ ++d  +++++ vd + + ++ + + n++g+Pt+ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU 176 VLGDKNFDDEVKTDDDTVWFIKFFAPWCGYCQELAPVWKDLSQVLADdpNIRIALVDCTVE-KSTCAKHNIKGYPTISV 253
+                                     566899**********9**************************8866578999999*9999.99**************8 PP
+
+                        msa_file 112 dkdgkviarivG 123
+                                     +  g  ++ + G
+  tr|A0A388KGT8|A0A388KGT8_CHABU 254 FHRGAFVEYYEG 265
+                                     877777655544 PP
+
+  == domain 3  score: 50.8 bits;  conditional E-value: 2.7e-12
+                        msa_file  36 asdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfd 112
+                                      s e+++++++d+ gk+ +++f+ swC +C+e++p+ +el++++ d  +v++++vd + + ++l+ + +++g+Pt+ ++
+  tr|A0A388KGT8|A0A388KGT8_CHABU 305 LSSENFDELVKDD-GKVWLIKFFVSWCDYCQEMAPVWKELSQAFVDdaNVRIAHVDCTVE-NDLCTKHDIKGYPTLSVF 381
+                                     4559999999999.7*****************************444689******9999.89**************88 PP
+
+                        msa_file 113 kdgkviarivG 123
+                                       g  ++ + G
+  tr|A0A388KGT8|A0A388KGT8_CHABU 382 HRGAFREYYEG 392
+                                     78777765555 PP
+
+  == domain 4  score: 52.7 bits;  conditional E-value: 7.1e-13
+                        msa_file  38 deelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfdkd 114
+                                      +++++++++  gk+  ++f+a+wCg C+ ++p+ eel++++ d   v++++vd + + ++l+ +  ++g+Pt+ ++ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU 433 SKNFDEQVKAX-GKVWFVKFFAPWCGFCQVLAPVWEELSQAFVDdaXVRIAHVDCTVE-RDLCTKXXIKGYPTMSVFHN 509
+                                     36677777666.8*****************************554689******9999.99****************** PP
+
+                        msa_file 115 gkviarivGavdaell 130
+                                     g+ ++++ G  d e l
+  tr|A0A388KGT8|A0A388KGT8_CHABU 510 GRFLKEYEGGGDLEAL 525
+                                     ****999985444433 PP
+
+  == domain 5  score: 52.3 bits;  conditional E-value: 9e-13
+                        msa_file  38 deelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfdkd 114
+                                      ++++++++++ g +  ++++a+wCg C+ ++p  ++l++++++  +v++++vd + + +e++ + +++g+Pt+ ++ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU 560 SSNFDDEVKAD-GTVWFVKYFAPWCGFCMDMAPAWKQLSQAFAEdaTVRIAEVDCTVQ-KEICTKHGIKGYPTINVIHN 636
+                                     46778888777.7899**************************66678999999*9999.******************** PP
+
+                        msa_file 115 gkviarivGav 125
+                                     gk ++++ G  
+  tr|A0A388KGT8|A0A388KGT8_CHABU 637 GKFLKEYEGDT 647
+                                     ****9999843 PP
+
+  == domain 6  score: 61.1 bits;  conditional E-value: 1.8e-15
+                        msa_file  35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflf 111
+                                     +  d++++++++++ gk+  ++f+a+wCg+Ck ++p  +ela++++d  +v++++vd +++ ++ + +  v+g+P++ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU 685 VLGDSSFNKQVKAD-GKVWFVKFFAPWCGHCKRLAPAWKELAQALADddTVRIAHVDCTAE-KDTCTKHEVKGYPSMKV 761
+                                     45678899999888.8***************************9955559***********.***************** PP
+
+                        msa_file 112 dkdgkviarivGavdaella 131
+                                     + +g+ ++++ Ga d e l+
+  tr|A0A388KGT8|A0A388KGT8_CHABU 762 FHNGQFVKQYRGARDVESLK 781
+                                     ************98877664 PP
+
+  == domain 7  score: 66.4 bits;  conditional E-value: 4e-17
+                        msa_file  35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflf 111
+                                     +  d+++++ ++++ gk+  ++f+a+wCg+Ck+++p  eel++ ++d  +v++++vd +++ +e +k++++ g+Pt+ +
+  tr|A0A388KGT8|A0A388KGT8_CHABU 812 VLRDSSFDENVKAD-GKVWFIKFFAPWCGHCKTLAPAWEELSQSLADhaTVRIAHVDCTAE-KETCKKYQIGGYPTMNV 888
+                                     45567788888777.8***************************99888889**********.****************8 PP
+
+                        msa_file 112 dkdgkviarivGavd 126
+                                     + +gkv++++ G  d
+  tr|A0A388KGT8|A0A388KGT8_CHABU 889 FYNGKVVKEYSGNRD 903
+                                     88*****99999432 PP
+
+  == domain 8  score: 69.3 bits;  conditional E-value: 5.2e-18
+                        msa_file   35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtf 109 
+                                      +  d++++++++++ gk+  ++f+a+wCg+Ck+++p  +el++ ++d  +v++++vd +++ +e +k++ ++g+Pt+
+  tr|A0A388KGT8|A0A388KGT8_CHABU  940 VLGDKSFDEQVKAD-GKVWFIKFFAPWCGHCKTLAPAWKELSQSLADhaTVRIAHVDCTAE-KETCKKYEIRGYPTM 1014
+                                      56689999999988.8***************************99888889**********.*************** PP
+
+                        msa_file  110 lfdkdgkviarivGavd 126 
+                                       ++ +gkv++++ G  d
+  tr|A0A388KGT8|A0A388KGT8_CHABU 1015 SVFYNGKVVKEYSGNRD 1031
+                                      *888*****99999432 PP
+
+  == domain 9  score: 55.5 bits;  conditional E-value: 9.2e-14
+                        msa_file   35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtf 109 
+                                      +  d+++++ ++++ gk+  ++f+a+wCg+C +++p   el++++++  +v++++vd +++ ++ + +++ s +Pt+
+  tr|A0A388KGT8|A0A388KGT8_CHABU 1068 VLGDKTFDENVKAD-GKVWFVKFFAPWCGHCETLAPAWRELSQNLAEhpTVRIAHVDCTAH-KDTCMKYGASCYPTM 1142
+                                      55678899999888.8***************************88666679**********.*************** PP
+
+                        msa_file  110 lfdkdgkviarivGavd 126 
+                                       ++ dgkv++++ G  d
+  tr|A0A388KGT8|A0A388KGT8_CHABU 1143 KVFYDGKVLKQYSGERD 1159
+                                      *888********99543 PP
+
+>> tr|A0A0L0GD07|A0A0L0GD07_9EUKA  Uncharacterized protein OS=Sphaeroforma arctica JP610 OX=667725 GN=SARC_00945 PE=3 SV
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   44.9   0.2   1.8e-10   8.5e-08      48     130 ..      33     119 ..      11     142 .. 0.71
+   2 !   51.7   0.7   1.4e-12   6.7e-10      36     131 ..     150     244 ..     128     252 .. 0.77
+   3 !   53.1   0.8   5.4e-13   2.6e-10      35     130 ..     272     366 ..     247     385 .. 0.74
+   4 !   50.3   0.6   3.7e-12   1.8e-09      37     131 ..     392     485 ..     370     507 .. 0.73
+   5 !   50.5   0.4   3.4e-12   1.6e-09      34     137 ..     512     612 ..     488     620 .. 0.78
+   6 !   45.6   0.2   1.1e-10   5.1e-08      38     131 ..     627     719 ..     612     741 .. 0.74
+   7 !   50.1   0.2   4.4e-12   2.1e-09      31     124 ..     747     848 ..     722     877 .. 0.72
+   8 !   50.1   0.4   4.5e-12   2.2e-09      35     134 ..     887     983 ..     849    1002 .. 0.71
+
+  Alignments for each domain:
+  == domain 1  score: 44.9 bits;  conditional E-value: 1.8e-10
+                        msa_file  48 a...kgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtflfdkdgkviar 120
+                                     a   k    +++f+a+wCg+Ck+++p +    +k++    +  + +vd + n ++++++++v+g+Pt+lf+++g+ +++
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA  33 AfvaK-DAALIKFFAPWCGHCKNMAPAYIAANEKLAAagiEGSLGEVDCTVN-SAVCSKYDVKGYPTLLFFSKGENVEK 109
+                                     33323.4689****************99977776644323236777788888.****************8888888877 PP
+
+                        msa_file 121 ivGavdaell 130
+                                     + +   ++ +
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 110 YSKGRTEDAI 119
+                                     7744444443 PP
+
+  == domain 2  score: 51.7 bits;  conditional E-value: 1.4e-12
+                        msa_file  36 asdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtflf 111
+                                      ++++++  +a++     +++f+a+wCg+Ck+++p ++   +k++    + ++++vd + + +++++++ v+g+Pt+lf
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 150 LTADTFDAFVAKDA---ALVKFFAPWCGHCKNMAPAYKAANEKLNAaghQSTLAEVDCTVQ-KDVCSKYEVKGYPTLLF 224
+                                     45566666666664...7********************99777733334679*****9999.99**************9 PP
+
+                        msa_file 112 dkdgkviarivGavdaella 131
+                                     +++g+ ++++ +   ++ + 
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 225 FSKGENVEKYSKGRTEDAFI 244
+                                     99999998888666666665 PP
+
+  == domain 3  score: 53.1 bits;  conditional E-value: 5.4e-13
+                        msa_file  35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtfl 110
+                                       +++++++ +a++     +++f+a+wCg+Ck+++p ++   +k++    + ++++vd + + +++++++ v+g+Pt+l
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 272 SLTADTFESFVAKDA---ALVKFFAPWCGHCKNMAPAYKAANEKLNAaghKSTLAEVDCTVQ-KDVCSKYEVRGYPTLL 346
+                                     445566666666664...7********************9988773334578******9999.99************** PP
+
+                        msa_file 111 fdkdgkviarivGavdaell 130
+                                     f+++g+ ++++ +   ++ l
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 347 FFSKGENVEKYSKGRTEDAL 366
+                                     88888888887754444444 PP
+
+  == domain 4  score: 50.3 bits;  conditional E-value: 3.7e-12
+                        msa_file  37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtflfd 112
+                                     s +++++ +a++     +++f+a+wCg+Ck+++p ++    k++    + ++++vd + + +el+ + +v+g+Pt+lf+
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 392 SSATFDSFVAKD---AALVKFFAPWCGHCKNMAPAYKAADAKLAAaglKNTLAEVDCTVE-KELCTKHGVKGYPTLLFF 466
+                                     444555555555...48********************77555533335459*****9999.9***************99 PP
+
+                        msa_file 113 kdgkviarivGavdaella 131
+                                     ++g+ ++++ +   ++ + 
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 467 SKGENVEKYSKGRTEDAFI 485
+                                     9999888888655555554 PP
+
+  == domain 5  score: 50.5 bits;  conditional E-value: 3.4e-12
+                        msa_file  34 qiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtf 109
+                                        +++++++ +a++     +++f+a+wCg+Ck+++p ++   +k++    +  +++vd + + ++l+ + +v+g+Pt+
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 512 PSLTADTFDSFVAKDA---ALVKFFAPWCGHCKNMAPAYKAANEKLEAagiKGSLAEVDCTVQ-KDLCTKHGVKGYPTL 586
+                                     3556677777777775...8********************99887755545558999999998.99************* PP
+
+                        msa_file 110 lfdkdgkviarivGavdaellakdaalk 137
+                                     lf+++g+ ++++ +   ++++   +++k
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 587 LFFSNGENVEKYSKGRTEDVFI--EFIK 612
+                                     *********9999877888876..4554 PP
+
+  == domain 6  score: 45.6 bits;  conditional E-value: 1.1e-10
+                        msa_file  38 deelqtaladakgkpvvldfwaswCgpCkevepdleelakky.....sdavvflkvdvdendmelakelnvsgvPtflf 111
+                                     +++++  +a++     +++f+a+wCg+Ck+++p ++   +k+     +    + +vd +++ +++++  +v+g+Pt+lf
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 627 ADTFDAFVAKDA---ALVKFFAPWCGHCKKMAPAYKAANEKLvaagiK--GSLGEVDCTKQ-SDVCSAHGVKGYPTLLF 699
+                                     455555555554...79******************9887766442222..36777799999.****************8 PP
+
+                        msa_file 112 dkdgkviarivGavdaella 131
+                                     +++g+ ++++  a  ++ l 
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 700 FSKGENVEKYSIARTEDALI 719
+                                     88888887777555555544 PP
+
+  == domain 7  score: 50.1 bits;  conditional E-value: 4.4e-12
+                        msa_file  31 kftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgv 106
+                                     +++ + ++++++ +++ a+  + +++f+a+wCg+Ck ++p ++e a+k++    ++ +++vd + +  + ++++   g+
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 747 NVV-VLTESNFDAQIKSAE--VALVKFFAPWCGHCKSLAPHYKEAATKLKTagsKALIAEVDCTVE--NSLSKYAPDGY 820
+                                     333.6799999******96..99**********************998855555789999996666..45888888*** PP
+
+                        msa_file 107 PtflfdkdgkviarivG..........a 124
+                                     Pt+l++k+g++i++ +G          +
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 821 PTVLLFKNGEEIEEWMGsdrtadgivsY 848
+                                     ************9999833333333331 PP
+
+  == domain 8  score: 50.1 bits;  conditional E-value: 4.5e-12
+                        msa_file  35 iasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky...sdavvflkvdvdendmelakelnvsgvPtfl 110
+                                     i ++ ++++++++++  +++++++a+wCg+Ck+++p ++e a ++   s+++v+++vd  +  +e +k+l  +g+Pt+l
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 887 ILTEGNFEKQIKANP--LMLIKVYAPWCGHCKALAPFYKEAAAQLkaaSSTAVLAEVD--ATVQESLKKLAPEGYPTVL 961
+                                     555566667777776..99**********************88663334456777666..444578************* PP
+
+                        msa_file 111 fdkdgkviarivGavdaellakda 134
+                                     ++kdgk++++ +G  + e++   +
+  tr|A0A0L0GD07|A0A0L0GD07_9EUKA 962 LYKDGKEVEEWMGQRSTEDIV--N 983
+                                     ********9999866665554..3 PP
+
+>> tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA  Uncharacterized protein OS=Achlya hypogyna OX=1202772 GN=ACHHYP_17421 PE=4 SV=1
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   52.6   0.0   7.6e-13   3.6e-10      27     124 ..      26     126 ..       6     148 .. 0.75
+   2 !   57.9   0.0   1.8e-14   8.4e-12      29     118 ..     150     236 ..     135     259 .. 0.83
+   3 !   45.5   0.0   1.1e-10   5.4e-08      33     118 ..     277     363 ..     246     409 .. 0.81
+   4 !   35.0   0.0     2e-07   9.5e-05      49     118 ..     413     483 ..     384     505 .. 0.82
+   5 !   39.7   0.0   7.2e-09   3.4e-06      32     118 ..     518     610 ..     485     635 .. 0.79
+   6 !   56.5   0.0   4.6e-14   2.2e-11      36     127 ..     666     762 ..     638     846 .. 0.77
+   7 !   63.5   0.0   3.2e-16   1.6e-13      25     118 ..    1025    1124 ..     974    1166 .. 0.73
+
+  Alignments for each domain:
+  == domain 1  score: 52.6 bits;  conditional E-value: 7.6e-13
+                        msa_file  27 akspkftqiasd..eelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvdendmelakelnv 103
+                                     a++ +++q +sd  +el ++ + a g   +++f+a+wCg+Ck ++p++e+la++ s    ++++dv+++ +++ ++++v
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA  26 ATTTNVVQLTSDnfAELTQLETGATG-DWLIKFYAPWCGHCKRLAPVFEDLATEVST--SIAEIDVEAH-SDIKEQFGV 100
+                                     45566777433333555555444443.4689**********************9877..79999*****.********* PP
+
+                        msa_file 104 sgvPtflfdkdgkvi.....arivGa 124
+                                     sg+Pt+lf+kd k+        i+G+
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 101 SGYPTLLFFKDQKMYafkgeRTIAGF 126
+                                     **********9887656665555554 PP
+
+  == domain 2  score: 57.9 bits;  conditional E-value: 1.8e-14
+                        msa_file  29 spkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvdendmelakelnvsgvP 107
+                                     +p+ +++ ++++++ ++        +++f+a+wCg+Ck+++p+++ l++ +  +v+++kvdv+e+ ++l ++++++g P
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 150 APSHVKALTADSFDAEVLGGG--QWLVKFYAPWCGHCKQLAPTYDALSQDLLGRVNIAKVDVTEH-EALGERFGIQGFP 225
+                                     555666667777777766653..4799**********************99999***********.************* PP
+
+                        msa_file 108 tflfdkdgkvi 118
+                                     t+lf+ d k+ 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 226 TLLFFADSKMY 236
+                                     ***99997765 PP
+
+  == domain 3  score: 45.5 bits;  conditional E-value: 1.1e-10
+                        msa_file  33 tqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtf 109
+                                     +   ++++++ ++ +       ++f+a+wCg+Ck+++ + e+la +++d  +v ++kvd +e+  +l  +++v g+Pt+
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 277 VVKLTTATFDGLVMQPSSGGWFIKFMAPWCGHCKKMARTWEKLALALKDapDVHIAKVDATEE-ADLKMRFQVAGYPTV 354
+                                     33456677777766666667899********************9988776779*********9.9************** PP
+
+                        msa_file 110 lfdkdgkvi 118
+                                     lf +d+k+ 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 355 LFVRDNKMY 363
+                                     *99997654 PP
+
+  == domain 4  score: 35.0 bits;  conditional E-value: 2e-07
+                        msa_file  49 kgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfdkdgkvi 118
+                                          ++ f a wCg+Cke+   + + a +++d  +v +++vd d n ++l  ++ ++g+Pt+l+ ++g+v 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 413 GADAWLVQFHAHWCGHCKEMMGAMLQTALTLKDhgNVHVARVDADVN-KALGMRFAITGYPTLLLLRGGRVY 483
+                                     4456799***************99999888877778***********.****************99999764 PP
+
+  == domain 5  score: 39.7 bits;  conditional E-value: 7.2e-09
+                        msa_file  32 ftqiasdeelqta.ladak....gkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvden.dmelakelnvs 104
+                                      t+ ++d+ l+   l++++     kp+++ f a+wCg+C ++ p++ ++a+++  +v++  +d +++ ++ l++ + + 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 518 ATKKTTDAPLDVVmLTTDDvralSKPTLVMFHAPWCGHCNKLLPTFGKVATALLGEVRVGSIDGTNKiNQPLLQAFSIA 596
+                                     344455555665543333255668***************************998889******888889********** PP
+
+                        msa_file 105 gvPtflfdkdgkvi 118
+                                     ++Pt+++  dg++ 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 597 SYPTVMMLHDGQYT 610
+                                     ******99999876 PP
+
+  == domain 6  score: 56.5 bits;  conditional E-value: 4.6e-14
+                        msa_file  36 asdeelqtalada...kgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtf 109
+                                     +++e+++  ++        +v+++f+a+wCgpC+++  ++ee+a ++++  +v +++vd   + +el  +l+v+ +Pt+
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 666 WTTETFDAHMQGPangTSELVLVEFYAQWCGPCRAFSAVYEEIAAELKKssNVAVVRVDGALD-EELRTRLGVENYPTV 743
+                                     3445555554333444489************************99774433789999998888.99************* PP
+
+                        msa_file 110 l.fdkdgkviarivGavda 127
+                                     l +dk  k++  ++G  + 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 744 LlVDKTHKLVYTYTGKERT 762
+                                     **********999995433 PP
+
+  == domain 7  score: 63.5 bits;  conditional E-value: 3.2e-16
+                        msa_file   25 a.......gakspkftqiasd.eelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvden 93  
+                                      a        +++pk    a+d  e++ a+ +      +++f+a+wCg+Ck+++p++e++a++++ +++++kvdv++n
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 1025 AeatvvvaVEEAPKTSYGATDaPEKNAATGAT-TGDWLVEFYAPWCGHCKHLAPVFEDVAQELDGTINVAKVDVTAN 1100
+                                      23333333334455555666644444444444.445789************************************** PP
+
+                        msa_file   94 dmelakelnvsgvPtflfdkdgkvi 118 
+                                       + l +++ ++g Pt+lf+ +g+v 
+  tr|A0A1V9Y4H9|A0A1V9Y4H9_9STRA 1101 -EGLGRRFEIKGFPTILFFHKGSVY 1124
+                                      .****************88888765 PP
+
+>> tr|T2MDU2|T2MDU2_HYDVU  Protein disulfide-isomerase A5 OS=Hydra vulgaris OX=6087 GN=PDIA5 PE=2 SV=1
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   62.8   0.2   5.1e-16   2.4e-13      27     130 ..     142     245 ..     121     260 .. 0.88
+   2 !   45.4   1.3   1.3e-10     6e-08      29     118 ..     266     354 ..     250     374 .. 0.78
+   3 !   55.9   0.2   7.3e-14   3.5e-11      37     116 ..     397     475 ..     381     505 .. 0.80
+   4 !   48.8   0.6   1.1e-11   5.2e-09      37     118 ..     522     601 ..     503     631 .. 0.79
+   5 !   43.9   0.4   3.6e-10   1.7e-07      49     126 ..     640     741 ..     607     754 .. 0.69
+   6 !   43.1   0.1   6.3e-10     3e-07      37     124 ..     764     852 ..     744     877 .. 0.77
+   7 !   44.4   0.1   2.5e-10   1.2e-07      30     124 ..     882     975 ..     856     998 .. 0.74
+   8 !   30.7   0.1   4.1e-06     0.002      37     137 ..    1015    1112 ..    1004    1118 .. 0.81
+
+  Alignments for each domain:
+  == domain 1  score: 62.8 bits;  conditional E-value: 5.1e-16
+                msa_file  27 akspkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvden.dmelakelnvsgvPtflfd 112
+                             +++++++ i+++++l+++ ++ kg   ++ f+a+wCg Ck+++p++   a ++++++v++++dvd+   +++  ++n++g+Pt++++
+  tr|T2MDU2|T2MDU2_HYDVU 142 QSAQNVVHINNEKDLNKLRKKEKG-QLLIMFYAPWCGFCKKLKPEYAGAADEMKNKAVLAAMDVDKPdVYNVRYQFNITGYPTIIYF 227
+                             467789999999999999999887.56779*********************************99997788999************* PP
+
+                msa_file 113 kdgkviarivGavdaell 130
+                              dg+++ r+ G +d+e +
+  tr|T2MDU2|T2MDU2_HYDVU 228 EDGNEKFRYSGKMDKEGI 245
+                             ************999866 PP
+
+  == domain 2  score: 45.4 bits;  conditional E-value: 1.3e-10
+                msa_file  29 spkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky..sdav.vflkvdvdendmelakelnvsgvPtflfd 112
+                             +p++t   +d+++++ l+++    +++ f+a+wCg+Ck+++p++ + a ++  ++ + ++++vd +++ ++ ++++ v+++Pt+ ++
+  tr|T2MDU2|T2MDU2_HYDVU 266 APEITH-LNDDNFDSTLKTSV--STMVMFYAPWCGYCKKMKPEYVNAAITLqaENVIaTLAAVDCTQS-QATCNKFEVKSYPTIKYF 348
+                             456665.47889999999985..59********************887755225533499999*****.****************55 PP
+
+                msa_file 113 kdgkvi 118
+                              +g ++
+  tr|T2MDU2|T2MDU2_HYDVU 349 INGTLM 354
+                             577665 PP
+
+  == domain 3  score: 55.9 bits;  conditional E-value: 7.3e-14
+                msa_file  37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtfl.fdkdgk 116
+                             sde++++++++ k  ++++ f+a+wCg+Ck+ +p++e  a+ ++d  +++f++vd + +  +l+k++ vsg+Ptf  f   gk
+  tr|T2MDU2|T2MDU2_HYDVU 397 SDENFKDEMKTRK--HTLVMFYAPWCGHCKKAKPEIEAAAEYFKDdrKITFAGVDCTVH-DALCKSYEVSGYPTFRyFL-YGK 475
+                             6788888888885..89999******************999776667********9999.9**************9554.333 PP
+
+  == domain 4  score: 48.8 bits;  conditional E-value: 1.1e-11
+                msa_file  37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky..sdavvflkvdvdendmelakelnvsgvPtfl.fdkdgkvi 118
+                             + +++++ +++++    ++ f+a+wCg+Ck+++p ++e a+++  ++  ++++vd ++n ++l++e  v+g+Pt+  f+ +gkv 
+  tr|T2MDU2|T2MDU2_HYDVU 522 NFNTFDNFISKNPS--ALVMFYAPWCGHCKALKPAYTEAAEELlyKN-HKLCAVDCTKN-QDLCNEHSVTGYPTIKhFY-NGKVS 601
+                             44788888888875..6777*******************99554488.79*********.****************777.67654 PP
+
+  == domain 5  score: 43.9 bits;  conditional E-value: 3.6e-10
+                msa_file  49 k............gkpvvldfwaswCgpCkevepdleelakkysd....avvflkvdvdendmelakelnvsgvPtflfdkdgkvi. 118
+                                           k+v++ f+a+wCg+C +++ d++++a+ + +    + +++++d   n ++ + +++v+g+Pt+ ++kdg+   
+  tr|T2MDU2|T2MDU2_HYDVU 640 HlddvtfpdfikeTKTVLIMFYAPWCGHCNKMKSDYQNVANIFHSqkilKERIAAIDCVVN-RATCIKYDVHGYPTLKLFKDGEKYa 725
+                             033333444444479************************8855333345467888897777.88**************999988773 PP
+
+                msa_file 119 ........arivGavd 126
+                                     ++iv +v+
+  tr|T2MDU2|T2MDU2_HYDVU 726 dyeggrtsSQIVEFVK 741
+                             4444444455555554 PP
+
+  == domain 6  score: 43.1 bits;  conditional E-value: 6.3e-10
+                msa_file  37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelak..kysd..avvflkvdvdendmelakelnvsgvPtflfdkdgkvia 119
+                             +d+++++ +a+     v++ f+a+wCg+Ck ++p +e  a+  ++++  + ++++ d + n + + k l ++g+Pt++++k+g  ++
+  tr|T2MDU2|T2MDU2_HYDVU 764 NDDTFDSFIAEYS--SVLVMFYAPWCGHCKSMKPAYERAAEyvNLKEelPGKLAAFDCTVN-KVVPKALALQGYPTLMYFKNGHQLE 847
+                             4577777777775..6*********************7776554444444489999*9999.99**********************9 PP
+
+                msa_file 120 rivGa 124
+                             ++ G 
+  tr|T2MDU2|T2MDU2_HYDVU 848 KYEGD 852
+                             99883 PP
+
+  == domain 7  score: 44.4 bits;  conditional E-value: 2.5e-10
+                msa_file  30 pkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtflfdk 113
+                             p+ +  ++++++++ + +++   v++ f+a+wC +C  ++p + + a+++++   + v+++vd +++  ela++ +v+++Pt+ +++
+  tr|T2MDU2|T2MDU2_HYDVU 882 PSAVHHITQNSFEEFILEKD---VLIMFYAPWCSHCNGMKPAFMQAANTLKEenfPGVLAAVDATKA-VELANKEGVKAYPTLRYYS 964
+                             44444556666666666654...*********************999977664454478888****9.******************* PP
+
+                msa_file 114 dgkviarivGa 124
+                             +g+ i++++  
+  tr|T2MDU2|T2MDU2_HYDVU 965 KGEFIEQFTDD 975
+                             *****777642 PP
+
+  == domain 8  score: 30.7 bits;  conditional E-value: 4.1e-06
+                msa_file   37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfdkdgkvia 119 
+                              s++ +q+ l+++   + ++ f+ +wC  C e++  + + a  +s      f++++ den   ++++ +v + P++ ++++g+ ++
+  tr|T2MDU2|T2MDU2_HYDVU 1015 SADGFQSFLNEKT--HALVMFYVKWCNGCFEMRGSVMQAASRLSTqpLYAFAAINCDEN-DVFCSSIGVVVFPSIKYYSKGDFVE 1096
+                              5566777777775..67888999**************9998775553459*********.9************************ PP
+
+                msa_file  120 rivGavdaellakdaalk 137 
+                              ++ G v+ e +   ++lk
+  tr|T2MDU2|T2MDU2_HYDVU 1097 NYEGIVKPESIV--NYLK 1112
+                              ****99888775..4444 PP
+
+>> tr|F0VDF8|F0VDF8_NEOCL  Thioredoxin-like protein OS=Neospora caninum (strain Liverpool) OX=572307 GN=BN1204_015430 PE
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   42.8   0.0   7.9e-10   3.8e-07      39     117 ..     708     789 ..     657     804 .. 0.77
+   2 !   47.7   0.0   2.4e-11   1.2e-08      31     129 ..     833     935 ..     810     960 .. 0.79
+   3 !   42.1   0.1   1.3e-09   6.1e-07      37     122 ..     977    1067 ..     938    1092 .. 0.72
+   4 !   42.1   0.1   1.3e-09   6.2e-07      37     129 ..    1116    1213 ..    1083    1230 .. 0.73
+   5 !   44.1   0.1   3.2e-10   1.5e-07      38     129 ..    1256    1352 ..    1233    1368 .. 0.74
+   6 !   31.6   0.1   2.2e-06     0.001      56     129 ..    1407    1486 ..    1379    1504 .. 0.77
+   7 !   31.7   0.1   2.2e-06     0.001      56     128 ..    1541    1619 ..    1494    1634 .. 0.78
+   8 !   31.5   0.1   2.4e-06    0.0011      56     128 ..    1675    1753 ..    1646    1768 .. 0.77
+   9 !   37.7   0.1     3e-08   1.5e-05      37     117 ..    1796    1880 ..    1762    1902 .. 0.75
+
+  Alignments for each domain:
+  == domain 1  score: 42.8 bits;  conditional E-value: 7.9e-10
+                msa_file  39 eelqtaladakgkpvvldfwaswCgpCkevepdleelak..ky...sdavvflkvdvdendmelakelnvsgvPtflfdkdgkv 117
+                             +++++ + +  +k v+l+ +a+wCg+Ck+++p++ee+a+   +   ++ +v++k+d +en ++  k +  s++Pt+lf+k g+ 
+  tr|F0VDF8|F0VDF8_NEOCL 708 NTFDSIVFNE-EKDVLLEIYAPWCGHCKNLKPTYEEFARlaSLspsAKSLVVAKMDGTEN-STRHKAFSWSAYPTILFIKAGSR 789
+                             4555554444.588***********************9865335443369**********.*******************9975 PP
+
+  == domain 2  score: 47.7 bits;  conditional E-value: 2.4e-11
+                msa_file  31 kftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelak...kysd...avvflkvdvdendmelakelnvsgvPtflf 111
+                             +  ++ +++++++ ++ +k+  v+l+++a+wCg+Ck ++p++e +a+   k ++    +v++k+d +e  +   ++++++g Pt+ f
+  tr|F0VDF8|F0VDF8_NEOCL 833 SAATVVNAANFDKIVNGDKD--VLLEVYAPWCGHCKRLQPVYEAFATaaaKSPSaraHLVVAKMDGTET-RPSQDDFKITGFPTIWF 916
+                             44456777888888888877..*********************9976322332255579**********.9999************* PP
+
+                msa_file 112 dkdgkvi.arivGavdael 129
+                             +k+g+ +  +++G  +a +
+  tr|F0VDF8|F0VDF8_NEOCL 917 IKKGSGKpIKHTGGRSARD 935
+                             ***8877645555444433 PP
+
+  == domain 3  score: 42.1 bits;  conditional E-value: 1.3e-09
+                msa_file   37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdg 115 
+                                +++++++ ++ +k v+l+++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ f+k+g
+  tr|F0VDF8|F0VDF8_NEOCL  977 VRNTFEKEVLQS-DKDVLLEVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWFIKKG 1059
+                              335666666666.578*********************8866443333444469******9999.555789**********99998 PP
+
+                msa_file  116 kvi.ariv 122 
+                              + +  ++ 
+  tr|F0VDF8|F0VDF8_NEOCL 1060 SGKpIKHS 1067
+                              77752333 PP
+
+  == domain 4  score: 42.1 bits;  conditional E-value: 1.3e-09
+                msa_file   37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdg 115 
+                                +++++++ ++ +k v+l+++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ f+k+g
+  tr|F0VDF8|F0VDF8_NEOCL 1116 VRNTFEKEVLQS-DKDVLLKVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWFIKKG 1198
+                              346677776666.578*********************8866443333444469******9999.555789*************98 PP
+
+                msa_file  116 kvi.arivGavdael 129 
+                              + +  +++G  +a +
+  tr|F0VDF8|F0VDF8_NEOCL 1199 SGKpIKHTGGRSARD 1213
+                              877645555444443 PP
+
+  == domain 5  score: 44.1 bits;  conditional E-value: 3.2e-10
+                msa_file   38 deelqtaladakgkpvvldfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdgk 116 
+                               +++++++ ++ +k v+l+++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n m    e++ +g Pt+ f+k+g+
+  tr|F0VDF8|F0VDF8_NEOCL 1256 RNTFEKEVLQS-DKDVLLEVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-MLDNPEFKWTGFPTIWFIKKGS 1338
+                              36667776666.578*********************8866443333444469**********.88899**************988 PP
+
+                msa_file  117 vi.arivGavdael 129 
+                               +  +++G  +a +
+  tr|F0VDF8|F0VDF8_NEOCL 1339 GKpIKHTGGRSARD 1352
+                              77645555444443 PP
+
+  == domain 6  score: 31.6 bits;  conditional E-value: 2.2e-06
+                msa_file   56 dfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdgkvi.arivGavdael 129 
+                              +++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ f+k+g+ +  +++G  +a +
+  tr|F0VDF8|F0VDF8_NEOCL 1407 KVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWFIKKGSGKpIKHTGGRSARD 1486
+                              68****************8866443333444469******9999.555789*************98877645555444443 PP
+
+  == domain 7  score: 31.7 bits;  conditional E-value: 2.2e-06
+                msa_file   56 dfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdgkvi.arivGavdae 128 
+                              +++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ f+k+g+ +  +++G  +a 
+  tr|F0VDF8|F0VDF8_NEOCL 1541 KVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWFIKKGSGKpIKHTGGRSAR 1619
+                              69****************8866443333444469******9999.555789*************9887764555544444 PP
+
+  == domain 8  score: 31.5 bits;  conditional E-value: 2.4e-06
+                msa_file   56 dfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdgkvi.arivGavdae 128 
+                              +++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ f+k+g+ +  +++G  +a 
+  tr|F0VDF8|F0VDF8_NEOCL 1675 KVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWFIKKGSGKpIKHTGGRSAR 1753
+                              68****************8866443333444469******9999.555789*************9887764555544444 PP
+
+  == domain 9  score: 37.7 bits;  conditional E-value: 3e-08
+                msa_file   37 sdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky......sdavvflkvdvdendmelakelnvsgvPtflfdkdg 115 
+                                +++++++ ++ +k v+l+++a+wCg+Ck++ep++e +a++       ++++v++k+d ++n      e++ +g Pt+ + ++g
+  tr|F0VDF8|F0VDF8_NEOCL 1796 VRNTFEKEVLQS-DKDVLLEVYAPWCGHCKKLEPVYEAFAREAaksataAKNLVVAKMDGTQN-TLDNPEFKWTGFPTIWLVRKG 1878
+                              346677776666.578*********************9866443333444469******9999.444678999999999877766 PP
+
+                msa_file  116 kv 117 
+                              + 
+  tr|F0VDF8|F0VDF8_NEOCL 1879 SG 1880
+                              54 PP
+
+>> tr|A0A3M6TLX3|A0A3M6TLX3_9CNID  Uncharacterized protein OS=Pocillopora damicornis OX=46731 GN=pdam_00004871 PE=4 SV=1
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   66.2   0.0   4.7e-17   2.2e-14      29     131 ..     150     252 ..     136     261 .. 0.91
+   2 !   56.6   0.3   4.3e-14     2e-11      36     126 ..     280     378 ..     256     385 .. 0.83
+   3 !   53.3   0.9   4.6e-13   2.2e-10      36     127 ..     403     493 ..     386     518 .. 0.76
+   4 !   36.0   0.6   9.8e-08   4.7e-05      33     100 ..     523     590 ..     512     595 .. 0.82
+   5 !   40.1   1.0   5.3e-09   2.5e-06      31     111 ..     630     711 ..     593     731 .. 0.69
+   6 !   44.2   0.1   2.8e-10   1.4e-07      32     130 ..     750     850 ..     712     859 .. 0.80
+   7 !   51.0   0.2   2.3e-12   1.1e-09      36     130 ..     883     976 ..     848     984 .. 0.77
+
+  Alignments for each domain:
+  == domain 1  score: 66.2 bits;  conditional E-value: 4.7e-17
+                        msa_file  29 spkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvden.dmelakelnvsgv 106
+                                     ++++  +++ +e+ +++++ k kp+++ f+a+wCg+Ck+++pd+   a++++ ++ ++++dvd    +++ +++n++g 
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 150 TEDVRHVHTSSEFVKLTTKEK-KPIMVMFYAPWCGYCKKLKPDYAVAATELKGEAIMAGMDVDTYeAYQIREKFNITGF 227
+                                     5678889999***99999997.*******************************99******99888899********** PP
+
+                        msa_file 107 PtflfdkdgkviarivGavdaella 131
+                                     Pt++++ +g+++ r+ G  d++ l 
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 228 PTLIYFENGEEKYRYQGKHDKDSLV 252
+                                     *****************99888764 PP
+
+  == domain 2  score: 56.6 bits;  conditional E-value: 4.3e-14
+                        msa_file  36 asdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelakelnvsgvPtflf 111
+                                      +d+++++ +a+++   v++ f+a+wCg+Ck+++p++++ ak++++   + v+++vd +++  ++ k+++++g+Pt+ +
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 280 LKDDTFDDFIANNP--SVLVMFYAPWCGHCKAMKPEYTDAAKTMKEeevPGVIAAVDATKE-TAVGKRFKIEGYPTVKY 355
+                                     35688999999998..5*************************99776565589999****9.***************** PP
+
+                        msa_file 112 dkdgkvi........arivGavd 126
+                                     +kdg+          ++iv +++
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 356 FKDGEFAfdvnertaDKIVAFMK 378
+                                     ***99887777777777776665 PP
+
+  == domain 3  score: 53.3 bits;  conditional E-value: 4.6e-13
+                        msa_file  36 asdeelqtaladakgkpvvldfwaswCgpCkevepdleelak...kysdavvflkvdvdendmelakelnvsgvPtflf 111
+                                      +d++++  l+  k+k+v++ f+a+wCg+Ck+ +p++ e ak   + s +v  ++vd + + ++++++++v+g+Ptf +
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 403 LTDDTFKGFLK--KKKHVLVMFYAPWCGHCKKAKPEFMEAAKhdaENS-KVAYAAVDCTVH-RSVCNQFDVQGYPTFRY 477
+                                     33444444444..4589***********************99653334.6999999*9999.****************7 PP
+
+                        msa_file 112 dkdgkviarivGavda 127
+                                     ++ gk   +++G   a
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 478 FNYGKKDFKYIGGRVA 493
+                                     7777776555553333 PP
+
+  == domain 4  score: 36.0 bits;  conditional E-value: 9.8e-08
+                        msa_file  33 tqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd...avvflkvdvdendmelake 100
+                                     ++  +d+++++ ++++    v++ f+a+wCg+Ck+++p + e a+++ +   + v+++vd +++ ++la++
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 523 VTHLTDDTFEEFVKTHH--SVLVMFYAPWCGHCKAMKPAYMEAAEELHSknaRSVLAAVDCTKE-KSLAQK 590
+                                     44567889999999986..6***********************997733345679*****9999.888886 PP
+
+  == domain 5  score: 40.1 bits;  conditional E-value: 5.3e-09
+                        msa_file  31 kftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky..sdav..vflkvdvdendmelakelnvsg 105
+                                     +++   +++++q+ ++ +     ++ f+a+wC++Ck+++p+++e+ak+   +++v   + +vd + + ++l+ e  v+ 
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 630 DVVH-LTASTFQEFIKSHS--SALVMFYAPWCPHCKKIKPEFSEVAKEVntENKVpgALGAVDCTVD-GDLCTEQEVKR 704
+                                     2222.34466666666665..67888*******************9966333333226667797777.88********* PP
+
+                        msa_file 106 vPtfl.f 111
+                                     +Pt+  f
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 705 YPTYGeF 711
+                                     ***9544 PP
+
+  == domain 6  score: 44.2 bits;  conditional E-value: 2.8e-10
+                        msa_file  32 ftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelak....kysdavvflkvdvdendmelakelnvsgv 106
+                                     +  + ++e++++ +a+++   v++ f+a+wCg+Ck+++p +++ a+    ++++   +++vd ++  ++++k+ +++g+
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 750 VH-FLTNETWDSFMAEHP--SVLVMFFAPWCGYCKAMKPNFFKAAEilseQHPS-EALAAVDCTKF-KSICKRTGLKGY 823
+                                     33.568899999999998..59********************996655447777.689********.************ PP
+
+                        msa_file 107 Pt...flfdkdgkviarivGavdaell 130
+                                     Pt    lf+++g++ + + G  +ae++
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 824 PTgktRLFFRNGEMEKDYDGDRSAEDI 850
+                                     *75535699999999888887777766 PP
+
+  == domain 7  score: 51.0 bits;  conditional E-value: 2.3e-12
+                        msa_file  36 asdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendmelakelnvsgvPtflfd 112
+                                      + +++++ l++    +v++ f+a+wCg+C++ +p++ + ++++++  +  f +vd +++ ++l+++ +v+g+Pt+ ++
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 883 LASANFESFLSE--TEHVLVMFFAPWCGHCQNAKPKFLKASEAFAEeaNKAFTAVDCTQD-SDLCDKQGVNGYPTIKYY 958
+                                     222333333333..579***********************9999665545899*******.****************** PP
+
+                        msa_file 113 kdgkviarivGavdaell 130
+                                     + g  + ++ G   +e++
+  tr|A0A3M6TLX3|A0A3M6TLX3_9CNID 959 RYGAFVVEYDGDRTEEDF 976
+                                     ***999988888777776 PP
+
+>> tr|A0A1J1I965|A0A1J1I965_9DIPT  CLUMA_CG009948, isoform B OS=Clunio marinus OX=568069 GN=CLUMA_CG009948 PE=4 SV=1
+   #    score  bias  c-Evalue  i-Evalue hmmfrom  hmm to    alifrom  ali to    envfrom  env to     acc
+ ---   ------ ----- --------- --------- ------- -------    ------- -------    ------- -------    ----
+   1 !   47.0   0.1     4e-11   1.9e-08      25     117 ..    1389    1486 ..    1303    1523 .. 0.78
+   2 !   63.8   0.3   2.6e-16   1.3e-13      42     137 ..    1540    1631 ..    1505    1650 .. 0.82
+   3 !   59.2   1.4   6.6e-15   3.2e-12      49     136 ..    1670    1758 ..    1634    1900 .. 0.83
+   4 !   40.0   0.6   5.7e-09   2.7e-06      21     121 ..    2222    2320 ..    2099    2340 .. 0.80
+   5 !   21.2   0.4    0.0036       1.7      39     132 ..    2354    2455 ..    2327    2469 .. 0.72
+   6 !   35.3   0.7   1.6e-07   7.7e-05      39     137 ..    2775    2875 ..    2455    2925 .. 0.84
+   7 !   22.9   1.0    0.0011      0.52      33     130 ..    2954    3049 ..    2946    3063 .. 0.82
+   8 ?   15.3   0.1      0.25   1.2e+02      28     118 ..    3074    3162 ..    3057    3190 .. 0.76
+
+  Alignments for each domain:
+  == domain 1  score: 47.0 bits;  conditional E-value: 4e-11
+                        msa_file   25 a.....gakspkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakky....sdavvflkvdvde 92  
+                                            ++++++ t + +d+++++ l++++     + f+a+wCg+C  ++p+ ++la+ +    +++v++++vd +e
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1389 VksdedAQNEVDTTIVLTDSNFEDVLKTNN---FFVMFFAPWCGHCTRLKPTWSQLAEMLntqeESRVRIARVDCTE 1462
+                                      0444344566777779999**********8...999********************98444444558********** PP
+
+                        msa_file   93 ndmelakelnvsgvPtflfdkdgkv 117 
+                                      + ++ +++ +v+++Pt+ f+k g++
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1463 H-QKTCSDNDVTSYPTLKFFKTGEE 1486
+                                      *.****************9999987 PP
+
+  == domain 2  score: 63.8 bits;  conditional E-value: 2.6e-16
+                        msa_file   42 qtaladakgkpvvldfwaswCgpCkevepdleelak..kysdavvflkvdvdendmelakelnvsgvPtflfdkdgk 116 
+                                        ++a+ +     ++f+a+wCg+C++++p++eela+  +++ +v+++k+d +e  + ++k+++v+g+Pt+l++ +gk
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1540 AAQTANGN---WFIKFYAPWCGHCQKLAPTFEELARsvEHDTTVTIAKIDCTEY-RPICKDYDVKGYPTLLWFENGK 1612
+                                      43333333...678********************997777889***********.********************** PP
+
+                        msa_file  117 viarivGavdaellakdaalk 137 
+                                       +++++G+ + ++l+  a+++
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1613 KVDKYTGPRSLQDLK--AYVE 1631
+                                      *******98666654..4444 PP
+
+  == domain 3  score: 59.2 bits;  conditional E-value: 6.6e-15
+                        msa_file   49 kgkpvvldfwaswCgpCkevepdleelakky...sdavvflkvdvden.dmelakelnvsgvPtflfdkdgkviari 121 
+                                      +  ++ ++f+a+wCg+Ck ++p+ ++la+k+   + +v+++kvd + + ++el++e +v+g Pt++++k+g+ ++++
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1670 ESGVTFVKFFAPWCGHCKRLAPTWQQLAEKFvgdA-DVKIAKVDCTLQdNRELCSEQDVNGFPTLYIYKNGDKVTEY 1745
+                                      35689**************************8744.5*******666667************************999 PP
+
+                        msa_file  122 vGavdaellakdaal 136 
+                                       G+ + ++l   +++
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 1746 NGSRSLDDLH--NFV 1758
+                                      9976555544..333 PP
+
+  == domain 4  score: 40.0 bits;  conditional E-value: 5.7e-09
+                        msa_file   21 rlstagakspkftqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelakkysd..avvflkvdvdendm 95  
+                                      ++s++   s  + q  +++++++ l+++++  v ++f+++wC + k+v  + e+l + y++  +v+++++d +++ +
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2222 PNSAD-DGSDYVSQPLTKSNYEKVLQENEN--VFVKFFTYWCYYSKQVFDTWEDLGEHYTNskDVKIAEIDCENQ-K 2294
+                                      33333.357778888888999999999975..***********************887744447**********9.* PP
+
+                        msa_file   96 elakelnvsgvPtflfdkdgkviari 121 
+                                       l+k ++v+ +P+fl++k+g  + +i
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2295 PLCKLYKVRNYPSFLMFKNGVKKRKI 2320
+                                      *******************9877665 PP
+
+  == domain 5  score: 21.2 bits;  conditional E-value: 0.0036
+                        msa_file   39 eelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkvdvden.dmelakelnvsgvPtflfdkd 114 
+                                      e++ + ++d       + f+a+wC  C  +  + ee+  ++ d  +++ +d d +  +++++ + ++ +Pt++++  
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2354 ENYLNYVSDES-GCLFVRFYATWCRDCSSFTHKWEEVGSALYD-YNCVIADFDCAlYSDICDLFEIKNYPTYMYMES 2428
+                                      44444455554.47889********************666666.55665555555549***************9999 PP
+
+                        msa_file  115 gkviarivGavdaella.........k 132 
+                                      g ++ r+ +a+++ ++a         k
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2429 GVEMLRFKKAKPDRMIAfgkrmfsnrK 2455
+                                      999988888887777665555444441 PP
+
+  == domain 6  score: 35.3 bits;  conditional E-value: 1.6e-07
+                        msa_file   39 eelqtaladakgkpvvldfwaswCgpCkevepdleelakkysdavvflkv...dvdendmelakelnvsgvPtflfd 112 
+                                      ++++ +++ +k  +++++f+ + C + k++++d + l+++y+d+ +f+ v   d ++n + ++++++++ +Pt+l  
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2775 KQKEILTKLDK-GTMLVNFFVPTCKHSKAMAEDWKRLENAYKDD-KFISVmsiDCNKN-SWVCDNYDITRYPTILSL 2848
+                                      33333333344.47899********************9999884.5666655599999.999*************77 PP
+
+                        msa_file  113 kdgkviarivGavdaellak..daalk 137 
+                                       dg+ +++++G+ + e++++  +++lk
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2849 MDGNKLNKYAGSRSFEDFSNyiENVLK 2875
+                                      79999999**98888888744444444 PP
+
+  == domain 7  score: 22.9 bits;  conditional E-value: 0.0011
+                        msa_file   33 tqiasdeelqtaladakgkpvvldfwaswCgpCkevepdleelak..kysdavvflkvdvdendmelakelnvsgvP 107 
+                                      ++i++ + l++++++ +     ++f+ + C++Ck    +  el+k  k +d++ +l v       +++++++v+ +P
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 2954 KKIQERKALDEKINKGN---AFVKFTFPNCPYCKDATIVWGELEKahKNDDRFSLLSVCCKTY-PAICDRFGVKKYP 3026
+                                      44555577777777766...799***********9999999**995566779******99999.9************ PP
+
+                        msa_file  108 tflfdkdgkviarivGavdaell 130 
+                                       + ++kdg+ ++++ G++  e+l
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 3027 IVQYIKDGNKMQQFKGSKTLENL 3049
+                                      999***********998765555 PP
+
+  == domain 8  score: 15.3 bits;  conditional E-value: 0.25
+                        msa_file   28 kspkftqiasd.eelqtaladakgkpvvldfwaswCgpCkevepdleelakky..sdavvflkvdvdendmelakel 101 
+                                      ++ k++ i  + e++ + l+++   ++vl+f    C +Ck + +  ++la+ y  +d++++++v+ d +  + + e 
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 3074 PADKVKPIELTaETFHDVLSTDY--TYVLYF-LRKCKYCKGYPELWQSLAEHYagNDKIKIATVNCDRQ-TRTCIEN 3146
+                                      45566664434488888888874..678888.9*******9999999****9965559***********.6666665 PP
+
+                        msa_file  102 nvsgvPtflfdkdgkvi 118 
+                                        +g Pt+ ++ +g+ i
+  tr|A0A1J1I965|A0A1J1I965_9DIPT 3147 S-KGCPTLSLYHNGERI 3162
+                                      5.6******99999877 PP
