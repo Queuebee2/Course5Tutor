@@ -1,3 +1,4 @@
 scripts/DbCreds.py
 .idea/*
 */__pycache__/*
+*hmmsearch_output.hmm*
