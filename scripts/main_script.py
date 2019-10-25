@@ -18,7 +18,9 @@ HMM_FILENAME = 'hmm.hmm'
 BLAST_OUTPUT = 'blast_output.xml'
 FASTA_DATABASE = 'not set'
 
-
+# columns used in fetching data from uniprot
+DEFAULT_SELECTION = ["go(biological process)","go(cellular component)",
+                     "go(molecular function)"]
 
 # custom errors
 class TooManyError(Exception):
@@ -200,6 +202,26 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
 
 
 
+def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
+                      verbose=False):
+    """ """
+    
+    result = uniprot_handle.search(acession, columns=",".join(columns_list))
+
+    column_value_dict = dict()
+
+    for i, column in enumerate(columns_list):
+        if verbose:
+            print(i)
+            print(column, result.split("\n")[1].split("\t")[i-1])   #TODO FIX THIS UGLY THING
+            try:
+                value = result.split("\n")[1].split("\t")[i]
+            except IndexError:
+                value = None              
+
+            column_value_dict[column] = value
+        
+    return column_value_dict
 
 
 def main():
@@ -240,7 +262,7 @@ def main():
             # "SELECT * FROM PROTEIN WHERE ID = '{}'".format(id)
             # if select yields results: skip
             # else:
-                # find 2c pattern with regex
+                # find_target_pattern(sequence:str)
                 # fetch GO terms
                 # (not sure this is necessary ) - get whole fasta
                 # guess it is, since we need to add to main fasta

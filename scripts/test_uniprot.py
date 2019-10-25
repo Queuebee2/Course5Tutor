@@ -3,15 +3,31 @@ from bioservices import UniProt
 
 uniprot_handle = UniProt(verbose=False)
 
+# default columns to select in uniprot search
+DEFAULT_SELECTION = ["go(biological process)","go(cellular component)",
+                     "go(molecular function)"]
 
-search = uniprot_handle.search("Z9JIV0", columns = "go(cellular component), subcellular locations, go(biological process), go(molecular function),feature(TRANSMEMBRANE), id, entry name, protein names, 3d")
 
-print (search.split("\n")[1].split("\t"))
+def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
+                      verbose=False):
+    """ """
+    
+    result = uniprot_handle.search(acession, columns=",".join(columns_list))
+
+    column_value_dict = dict()
+
+    for i, column in enumerate(columns_list):
+            try:
+                value = result.split("\n")[1].split("\t")[i]
+            except IndexError:
+                value = None
+                
+            if verbose: print(column, value)
+            
+            column_value_dict[column] = value
+        
+    return column_value_dict
 
 
-search = uniprot_handle.search("Z9JIV0", columns = "go(cellular component), subcellular locations, go(biological process), go(molecular function),feature(TRANSMEMBRANE), id, entry name, protein names, 3d")
-
-print (search.split("\n")[1].split("\t"))
-search = uniprot_handle.search("Z9JIV0", columns = "go(cellular component), subcellular locations, go(biological process), go(molecular function),feature(TRANSMEMBRANE), id, entry name, protein names, 3d")
-
-print (search.split("\n")[1].split("\t"))
+d = get_uniprot_stuff(uniprot_handle, "Z9JIV0", verbose=True)
+print(d)
