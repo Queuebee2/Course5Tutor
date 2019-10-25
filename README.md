@@ -16,7 +16,7 @@ The program then iterates over the blast results, inserting each previously unkn
 a list of commands I had to use to get all the stuff we needed for the project
 ```
 apt install hmmer   
-apt install mafft 
+apt install mafft
 
 apt install python3
 apt install python3-pip
@@ -31,7 +31,9 @@ autoconf
 apt-get install build-essential
 ./configure
 apt install make
-make install
+make
 make check
+make install
+
 
 ```
