@@ -16,9 +16,9 @@ TARGET_PATTERN = re.compile('[C]..[C]')
 
 # entry-point filenames
 FASTA_DATABASE = '/home/queue/SwissProt/uniprot_sprot.fasta.gz'#must be zip.gz!
+FASTA_FILENAME = 'in_data/uniprot_seqs_rev.fasta.fasta'
 
-# temp filenames
-FASTA_FILENAME = 'fasta.fa'
+# temp filename
 MSA_FILENAME = 'msa.msa'
 HMM_FILENAME = 'hmm.hmm'
 HMM_SEARCH_TAB_OUTPUT_FILENAME = 'hmmsearch3_tab_output.tbl'
