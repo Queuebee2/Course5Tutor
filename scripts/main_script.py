@@ -393,12 +393,12 @@ def update_main_fasta():
         #clears entire contents of file if im right
         pass
 
-def quick_log(s):
+def quick_log(*args):
     with open('logfile.log', 'a') as logfile:
         logfile.write(70*"-"+"\n")
         logfile.write("quick_log:\n")
         text = ''
-        for symbol_or_string in s:
+        for symbol_or_string in args:
             # very ugly but now it handles lists with items too
             text += str(symbol_or_string)
         logfile.write(text)
