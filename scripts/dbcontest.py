@@ -22,6 +22,8 @@ q = f"""INSERT INTO PROTEIN VALUES(
                         {pos_2c});
                         """
 print(q)
-db.commit_query(q)
+#db.commit_query(q)
 mess = db.exists_protein('testgfId')
+iteration = db.selecx_max_iteration()
+print("iteration = ",iteration, type(iteration))
 print(mess)

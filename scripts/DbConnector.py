@@ -44,6 +44,21 @@ class DbConnector():
         self._connect()
     
 
+    def selecx_max_iteration(self):
+        """ literally select max(iteration) from Protein;
+        should return an int
+        """
+
+        self.cursor.execute("select max(iteration) from Protein;")
+        results = self.cursor.fetchall()
+        #print("max iteration select found:", results, type(results))
+
+        # result format is : [(0,)] <class 'list'>
+        # so we return the this.
+        return results[0][0]
+
+
+    
     def select_results(self, limit = 100):
         """ hardcoded select to just select current results"""
 
