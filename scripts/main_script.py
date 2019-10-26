@@ -5,6 +5,7 @@ import re
 
 from time import sleep
 
+from Bio import SearchIO
 from bioservices import UniProt
 from DbConnector import DbConnector
 
@@ -13,17 +14,25 @@ from DbConnector import DbConnector
 # regex object used in find_target_pattern(string):
 TARGET_PATTERN = re.compile('[C]..[C]')
 
-# filenames
+# entry-point filenames
+FASTA_DATABASE = '/home/queue/SwissProt/uniprot_sprot.fasta.gz'
+
+# temp filenames
 FASTA_FILENAME = 'fasta.fa'
 MSA_FILENAME = 'msa.msa'
 HMM_FILENAME = 'hmm.hmm'
+HMM_SEARCH_TAB_OUTPUT_FILENAME = 'hmmsearch3_tab_output.tbl'
 BLAST_OUTPUT = 'blast_output.xml'
-FASTA_DATABASE = 'not set'
 LOG_FILENAME = 'logfile.log'
+
 
 # columns used in fetching data from uniprot
 DEFAULT_SELECTION = ["go(biological process)","go(cellular component)",
                      "go(molecular function)"]
+
+# searchoptions for hmmsearch
+HMMSEARCH_OPTIONS = " --tblout " + HMM_SEARCH_TAB_OUTPUT_FILENAME + \
+                    " --acc --noali "
 
 # custom errors
 class TooManyError(Exception):
@@ -119,7 +128,9 @@ def create_hmm(msa_filename=MSA_FILENAME,
     return
 
 def do_hmm_search(hmm_filename=HMM_FILENAME,
-                  fasta_database=FASTA_DATABASE, verbose=False):
+                  fasta_database=FASTA_DATABASE,
+                  options= HMMSEARCH_OPTIONS ,
+                  verbose=False):
     """calls 'hmmsearch' through the shell to ty and
        create a  TODO <whatever the format is>
        by performing a hmmsearch on a database file
@@ -140,7 +151,7 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
         pass
     # Execute command if hmm hasn't been made before
     else:
-        cmd = "hmmsearch " + hmm_filename + " " + fasta_database
+        cmd = "hmmsearch {} {} {}".format(options,hmm_filename,fasta_database)
         e = subprocess.check_call(cmd, shell=True)
         if verbose:  print(e)
     return
@@ -219,10 +230,14 @@ def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
     return column_value_dict
 
 
-def iterate_hmm_search_tab_results(filename, verbose=False):
+def iterate_hmm_search_tab_results(filename=HMM_SEARCH_TAB_OUTPUT_FILENAME
+                                   , verbose=False):
     """ iterate over hmmsearch3 tab output using SearchIO.parse
 
     """
+
+    results
+    
     
 def make_obscure_SQL_part(d):
     """ takes a dictionary and puts the value in the right order
