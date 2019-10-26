@@ -158,30 +158,37 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     return
 
 
-def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE):
+def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
+                                  verbose=True):
     """ hacky function to gather header + sequence by acession in a
         downloaded database file (zipped fasta)
         """
     with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
+        if verbose: print("welcome to excessive verbosityPrints ltd© ")
         header = ''
         seq = ''
         lines = 0
         for line in db_as_zipfile:
+
             if lines % 250000 == 0:
                 print('looked through', lines,'lines for',accession)
             if line.startswith(">") and header != '':
                 print(header, "\n",seq)
                 if seq != '':
+                    if verbose: print("returning fetch!",header[:6],seq[:6])
                     return header, seq
                 else:
+                    if verbose: print("fetchfromzIp EXCEPTION!!!!")
                     # TODO MAKE CUSTOM EXCEPTION
                     raise Exception("seq not filled in"+\
                         "fetch_fasta_from_local_zip_db!")
             
             if accession in line:
+                if verbose: print("stripping a header from its trailingnewl")
                 header = line.strip("\n")
 
             if header != '' and not line.startswith(">"):
+                if verbose: print("appending to seq!",len(seq))
                 seq += line.strip("\n")
 
         # TODO MAKE CUSTOM EXCEPTION
@@ -352,7 +359,7 @@ def important_mainloop(verbose=True):
                 if verbose: print('skipped', actual_id)
                 continue  # skip (doesnt check if other values filled though)
             else:
-                if verbose:print(actual_id,'not in db, looking for hdr')
+                if verbose:print(actual_id,'not in db, looking for headr')
                 # deprecated as we have a local database now
                 # fetch_fasta_from_uniprot(uniprot_handle, acession)
 
