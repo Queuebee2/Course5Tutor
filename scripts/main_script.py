@@ -331,10 +331,7 @@ def important_mainloop(verbose=True):
     # having more than 50% of results be results we already
     # found
     running = True
-    iteration = 0 # TODO function to get highest iteration from db
-                  # and then we should actually check if
-                  # the current file we're working on
-                  # has been finished before increasing it
+    iteration = selecx_max_iteration 
     
     # 'running' loop
     while running:
@@ -359,13 +356,14 @@ def important_mainloop(verbose=True):
 
         search_result_terator = iterate_hmm_search_tab_results()
         
-        for identifier, evalue = next(search_result_terator)
+        for identifier, evalue in search_result_terator:
 
             if verbose:
                 if loopcount % 10 ==0:
                     print('fasta files:', loopcount)
+
             
-            if verbose: print('ITERATION ITEMS: id:',identifier, 'eval:',evalue)
+            if verbose: print('id:',identifier, 'eval:',evalue)
 
             actual_id = identifier.split("|")[1]
 
@@ -382,10 +380,6 @@ def important_mainloop(verbose=True):
                 
                 seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
                 header = "noheader lol"
-
-                with open(FASTA_FILENAME, 'a') as record_new_fasta:
-                    record_new_fasta.write("\n> sp|" + actual_id + "\n")
-                    record_new_fasta.write(seq)
 
 
                 # fetch header, fasta from local database
@@ -447,7 +441,6 @@ def important_mainloop(verbose=True):
         #outofinnerloop
         iteration += 1
 
-        
                     
         
         
@@ -473,27 +466,23 @@ def main():
         except Exception as SomeUnknownException:
             print("there was a horrible exception!")
             e = str(type(SomeUnknownException))
-            print(e)
-            print(SomeUnknownException)
+            print("Error str:",e)
+            print("Unknown except:",SomeUnknownException)
             
-            
+            with open('logfile.log', 'a') as logfile:
+                logfile.write(e+"\n")
+                
             if str(e) in caughtMistakes:
                 caughtMistakes[e] += 1
             else:
                 caughtMistakes[e] = 1
             if caughtMistakes[e] > 5:
                 print('too many exceptions caught of identical type')
-                
+
                 
             # sleep(1000)
             
     print(caughtMistakes)
-
-    with open('logfile.log', 'a') as logfile:
-        for k, v in caughtMistakes.items():
-            logfile.write(k + "\t\t" + str(v) + "\n")
-
-    
         
             
         
