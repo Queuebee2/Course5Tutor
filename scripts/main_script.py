@@ -343,6 +343,10 @@ def merge_fasta(to_add, main_file):
 
 
 def in_fasta(accession, fastafile=MAIN_FASTA_FILENAME):
+    if not os.path.isfile(MAIN_FASTA_FILENAME):
+        with open(fastafile, 'w') as createfile:
+            pass
+    
     with open(fastafile, 'r') as f:
         for line in f:
             if accession in f:
