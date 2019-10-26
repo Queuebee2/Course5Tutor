@@ -364,7 +364,7 @@ def important_mainloop(verbose=True):
                 if verbose:print(actual_id,'not in db, looking for header..')
 
 
-               """deprecated comment ;deprecated as we have a local database now"""
+                  # """deprecated comment ;deprecated as we have a local database now"""
                 
                 seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
                 header = "noheader lol"
