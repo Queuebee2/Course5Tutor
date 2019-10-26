@@ -392,7 +392,19 @@ def update_main_fasta():
     with open(FASTA_TOADD_FILENAME, 'w') as clearfile:
         #clears entire contents of file if im right
         pass
-    
+
+def quick_log(s):
+    with open('logfile.log', 'a') as logfile:
+        logfile.write(70*"-"+"\n")
+        logfile.write("quick_log:\n")
+        text = ''
+        for symbol_or_string in s:
+            # very ugly but now it handles lists with items too
+            text += str(symbol_or_string)
+                logfile.write(text)
+                
+                
+                
 def important_mainloop(verbose=1):
     # todo set verbose default to False again one day or another im gonna find ya im gonna getcha getcha getcha getcha
 
@@ -460,6 +472,14 @@ def important_mainloop(verbose=1):
                 if verbose:print(actual_id,'not in db, looking for header..')
                 
                 header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
+
+
+            if "U" in seq or "u" in seq:
+                print(actual_id, 'contained an U')
+                quick_log(actual_id, 'contained an U')
+
+                continue
+        
 
     
                 # fetch header LOCALLY, fasta from local database
