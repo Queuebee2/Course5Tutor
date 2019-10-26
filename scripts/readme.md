@@ -13,18 +13,20 @@ string holding (complete) path to the file that keeps track of fasta sequences f
 
 # global variables
 #### `DEFAULT_SELECTION : list[str]`
-list of columns (as strings) used in fetching data from uniprot  
+list of columns (as strings) used in fetching data from uniprot
+
+default value:
 ```
-default = [ "go(biological process)",
-            "go(cellular component)",
-            "go(molecular function)"]
+DEFAULT_SELECTION  = [
+    "go(biological process)",
+    "go(cellular component)",
+    "go(molecular function)"]
 ```
 
 
 #### `HMMSEARCH_OPTIONS : str`
 options to pass to the commandline call `>hmmsearch <options> hmm_file database`  
-
-taken from the HMMER manual:  
+<b>taken from the HMMER manual:</b>  
 `--tblout <f>` Save a simple tabular (space-delimited) file summarizing the
 per-target output, with one data line per homologous target
 sequence found.   
@@ -33,10 +35,31 @@ available for profiles and/or sequences.
 `--noali` Omit the alignment section from the main output. This can greatly reduce the output volume.
 
 
-```
+```python
 default = " --tblout " + HMM_SEARCH_TAB_OUTPUT_FILENAME + " --acc --noali "
 ```
 ###### <sub>note:`HMM_SEARCH_TAB_OUTPUT_FILENAME` is a global string that holds filename hmmsearch output should be directed to.  </sub>
+
+
+#### `MAIN_QUERY : str`
+the query string used to insert data into the main table, `PROTEIN`.
+
+default value:
+```python
+MAIN_QUERY = """INSERT INTO PROTEIN
+                  VALUES(
+                    %(id)s,
+                    %(db_id)s,
+                    %(header)s,
+                    %(seq)s,
+                    %(iteration)s,
+                    %(GO_bio_process)s,
+                    %(GO_cell_component)s,
+                    %(GO_molecular_func)s,
+                    %(pos_2c)s
+                  )"""
+
+```
 
 # temp filenames
 set as you like, not that it matters. As they're not overlapping. duh.
@@ -64,12 +87,18 @@ purpose: create MSA's from main dataset (fastas), create HMM from MSA, do a `phm
   - deprecated
   - `DEPRECATEME`
 - create generator that spits out identifiers from the tabular output that HMMsearch generates
-
-
+- iterate over this generator and do inner iteration stuff
+- merge the file of [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) with [`MAIN_FASTA_FILENAME`](MAIN_FASTA_FILENAME)
+- clear the file of [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) 
 
 
 ### inner iteration over hmmsearch results
 This loop works by calling next() on the generator to retrieve an identifier (and an e-value that we don't use atm)
 - get identifier
 - check if identifier exists in our database  
--
+- get header and sequence from Uniprot
+- find the value for pos_2c
+- get GO terms from uniprot
+- populate a dictionary `query_dict` with the values  
+- query the database with [`MAIN_QUERY`](MAIN_QUERY),`query_dict`, to insert info about the protein
+- check if this fasta had already been put in [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) and put it in if it hadn't.
