@@ -359,14 +359,13 @@ def important_mainloop(verbose=True):
 
         search_result_terator = iterate_hmm_search_tab_results()
         
-        while innerLoop:
+        for identifier, evalue = next(search_result_terator)
 
             if verbose:
                 if loopcount % 10 ==0:
                     print('fasta files:', loopcount)
-
-            identifier, evalue = next(search_result_terator)
-            if verbose: print('id:',identifier, 'eval:',evalue)
+            
+            if verbose: print('ITERATION ITEMS: id:',identifier, 'eval:',evalue)
 
             actual_id = identifier.split("|")[1]
 
@@ -383,6 +382,10 @@ def important_mainloop(verbose=True):
                 
                 seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
                 header = "noheader lol"
+
+                with open(FASTA_FILENAME, 'a') as record_new_fasta:
+                    record_new_fasta.write("\n> sp|" + actual_id + "\n")
+                    record_new_fasta.write(seq)
 
 
                 # fetch header, fasta from local database
@@ -444,6 +447,7 @@ def important_mainloop(verbose=True):
         #outofinnerloop
         iteration += 1
 
+        
                     
         
         
