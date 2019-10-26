@@ -416,8 +416,9 @@ def important_mainloop(verbose=True):
                     if GO_STUFF_D:
                         
                         foundGO = True
-                    print('zzzzz')
-                    sleep(10)
+                        
+                    #print('zzzzz')
+                    #sleep(10)
                     
                 if verbose:
                     for k, v in GO_STUFF_D.items():
@@ -432,9 +433,9 @@ def important_mainloop(verbose=True):
                         '{header}',
                         '{seq}',
                         {iteration},
-                        '{GO_STUF_D['go(biological process)']}',
-                        '{GO_STUF_D['go(cellular component)']}',
-                        '{GO_STUF_D['go(molecular function)']}',
+                        '{GO_STUFF_D['go(biological process)']}',
+                        '{GO_STUFF_D['go(cellular component)']}',
+                        '{GO_STUFF_D['go(molecular function)']}',
                         {pos_2c});
                         """
                 
@@ -465,7 +466,7 @@ def main():
         # here.
 
         # uknown exceptions
-        except Exception as SomeUknownException:
+        except Exception as SomeUnknownException:
             print("there was a horrible exception!")
             e = str(type(SomeUnknownException))
             print(e)
@@ -480,7 +481,7 @@ def main():
                 print('too many exceptions caught of identical type')
                 
                 
-            sleep(1000)
+            # sleep(1000)
             
     print(caughtMistakes)
 
