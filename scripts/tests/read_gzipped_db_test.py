@@ -15,13 +15,15 @@ gzip_db_location = "/home/queue/SwissProt/uniprot_trembl.fasta.gz"
 mi, ma = 25, 0
 with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
     testcount = 0
-    for seqio_record in SeqIO.parse(db_as_zipfile, "fasta"):
+    for i, seqio_record in enumerate( SeqIO.parse(db_as_zipfile, "fasta")):
 
         if len(seqio_record.id) < mi:
             mi = len(seqio_record.id)
         if len(seqio_record) > ma:
             ma = len(seqio_record.id)
 
+        if i % 1000000 = 0:
+            print(i)
 
 print(mi, ma)
 
