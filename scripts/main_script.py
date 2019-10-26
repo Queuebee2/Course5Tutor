@@ -2,7 +2,7 @@ from sys import argv
 import subprocess
 import os.path
 import re
-
+import gzip
 from time import sleep
 
 from Bio import SearchIO
