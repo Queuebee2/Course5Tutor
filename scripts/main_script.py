@@ -120,7 +120,7 @@ def create_msa_mafft(MAIN_FASTA_FILENAME=MAIN_FASTA_FILENAME,
         print("msa already exists, overwriting!")
     # Execute command if msa hasn't been made before
 
-    cmd = "mafft --anysymbol" + MAIN_FASTA_FILENAME + " > " + msa_destination_filename
+    cmd = "mafft --anysymbol " + MAIN_FASTA_FILENAME + " > " + msa_destination_filename
     e = subprocess.check_call(cmd, shell=True)
     if verbose:  print(e)
     return
@@ -482,7 +482,6 @@ def important_mainloop(verbose=1):
             if "U" in seq or "u" in seq:
                 print(actual_id, 'contained an U')
                 quick_log(actual_id, 'contained an U')
-
                 continue
         
 
