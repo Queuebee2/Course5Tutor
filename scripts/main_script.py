@@ -511,9 +511,9 @@ def important_mainloop(verbose=1):
                               'header':header,
                               'seq':seq,
                               'iteration': iteration,
-                              'GO_bio_process':GO_STUF_D['go(biological process)'],
-                              'GO_cell_component':GO_STUF_D['go(cellular component)'],
-                              'GO_molecular_func':GO_STUF_D['go(molecular function)'],
+                              'GO_bio_process':GO_STUFF_D['go(biological process)'],
+                              'GO_cell_component':GO_STUFF_D['go(cellular component)'],
+                              'GO_molecular_func':GO_STUFF_D['go(molecular function)'],
                               'pos_2c':pos_2c}
                 
                 db.insert(MAIN_QUERY, query_dict)
