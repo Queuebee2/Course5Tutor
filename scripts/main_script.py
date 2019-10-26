@@ -414,6 +414,7 @@ def important_mainloop(verbose=True):
                         print(e)
                         print("TODO FIGURE OUT HOW TO ENABLE ALL DEBUFGPRINTS$RITW")
                     if GO_STUFF_D:
+                        
                         foundGO = True
                     print('zzzzz')
                     sleep(10)
@@ -466,26 +467,26 @@ def main():
         # uknown exceptions
         except Exception as SomeUknownException:
             print("there was a horrible exception!")
-            e = str(type(SomeUknownException))
+            e = str(type(SomeUnknownException))
+            print(e)
+            print(SomeUnknownException)
+            
             
             if str(e) in caughtMistakes:
                 caughtMistakes[e] += 1
-                
             else:
                 caughtMistakes[e] = 1
-
             if caughtMistakes[e] > 5:
-
                 print('too many exceptions caught of identical type')
                 
                 
             sleep(1000)
             
-        print(caughtMistakes)
+    print(caughtMistakes)
 
-        with open('logfile.log', 'a') as logfile:
-            for k, v in caughtMistakes.items():
-                logfile.write(k + "\t\t" + str(v) + "\n")
+    with open('logfile.log', 'a') as logfile:
+        for k, v in caughtMistakes.items():
+            logfile.write(k + "\t\t" + str(v) + "\n")
 
     
         
