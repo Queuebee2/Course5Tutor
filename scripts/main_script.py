@@ -3,6 +3,8 @@ import subprocess
 import os.path
 import re
 
+from time import sleep
+
 from bioservices import UniProt
 from DbConnector import DbConnector
 
@@ -17,6 +19,7 @@ MSA_FILENAME = 'msa.msa'
 HMM_FILENAME = 'hmm.hmm'
 BLAST_OUTPUT = 'blast_output.xml'
 FASTA_DATABASE = 'not set'
+LOG_FILENAME = 'logfile.log'
 
 # columns used in fetching data from uniprot
 DEFAULT_SELECTION = ["go(biological process)","go(cellular component)",
@@ -216,8 +219,6 @@ def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
     return column_value_dict
 
 
-
-
 def make_obscure_SQL_part(d):
     """ takes a dictionary and puts the value in the right order
         based on the order of keys in the database
@@ -226,8 +227,7 @@ def make_obscure_SQL_part(d):
     return "'" + "','".join([d[k] for k in keys_in_order]) + "'"
         
 
-def main():
-
+def important_mainloop():
     # create an object to handle communications with mySQL database
     our_database_handle = DbConnector()
 
@@ -285,6 +285,48 @@ def main():
                             1337); # int pos2_c """ 
         
         # repeat?
+    
+def main():
+
+    # exceptions 
+    caughtMistakes = dict()
+    
+    try:
+        important_mainloop()
+
+    # exceptions we know how to handle
+    #
+    # here.
+
+    # uknown exceptions
+    except Exception as SomeUknownException:
+        e = str(type(SomeUknownException))
+        
+        if str(e) in caughtMistakes:
+            caughtMistakes[e] += 1
+            
+        else:
+            caughtMistakes[e] = 1
+
+        if caughtMistakes[e] > 5:
+
+            print('too many exceptions caught of identical type')
+            break
+            
+        sleep(1000)
+        
+    print(caughtMistakes)
+
+    with open('logfile.log', 'a') as logfile:
+        for k, v in caughtMistakes.items():
+            logfile.write(k + "\t\t" + str(v) + "\n")
+
+    
+        
+            
+        
+
+    
 
 
 if __name__ == "__main__":
