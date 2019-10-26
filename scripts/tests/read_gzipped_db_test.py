@@ -11,11 +11,21 @@ gzip_db_location = "/home/queue/SwissProt/uniprot_trembl.fasta.gz"
 
 # gzip doc on modes https://docs.python.org/3/library/functions.html#open
 # "rt" means "read text"? i think?
+
+mi, ma = 25, 0
 with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
     testcount = 0
     for seqio_record in SeqIO.parse(db_as_zipfile, "fasta"):
-        if testcount < 10:
-            print(seqio_record.id)
 
-        # i literally forgot this how dumb can I be
-        testcount += 1        
+        if len(seqio_record.id) < mi:
+            mi = len(seqio_record.id)
+        if len(seqio_record) > ma:
+            ma = len(seqio_record.id)
+
+
+print(mi, ma)
+
+
+                
+
+                    
