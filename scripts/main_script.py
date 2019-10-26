@@ -361,13 +361,18 @@ def important_mainloop(verbose=True):
                 if verbose: print('skipped', actual_id)
                 continue  # skip (doesnt check if other values filled though)
             else:
-                if verbose:print(actual_id,'not in db, looking for headr')
-                # deprecated as we have a local database now
-                # fetch_fasta_from_uniprot(uniprot_handle, acession)
+                if verbose:print(actual_id,'not in db, looking for header..')
+
+
+               """deprecated comment ;deprecated as we have a local database now"""
+                
+                seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
+                header = "noheader lol"
 
 
                 # fetch header, fasta from local database
-                header, seq = fetch_fasta_from_local_zip_db(actual_id)
+                # NEVERMIND WE DEPRECATE THIS ONE SINCE ITS NOT WORKING
+                #header, seq = fetch_fasta_from_local_zip_db(actual_id)
                 if verbose: print(header[:22], seq[:20])
 
                 # find pos_2c
