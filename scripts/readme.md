@@ -88,8 +88,8 @@ purpose: create MSA's from main dataset (fastas), create HMM from MSA, do a `phm
   - `DEPRECATEME`
 - create generator that spits out identifiers from the tabular output that HMMsearch generates
 - iterate over this generator and do inner iteration stuff
-- merge the file of [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) with [`MAIN_FASTA_FILENAME`](MAIN_FASTA_FILENAME)
-- clear the file of [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) 
+- merge the file of [`FASTA_TOADD_FILENAME`](fasta_toadd_filename--str-) with [`MAIN_FASTA_FILENAME`](main_fasta_filename--str)
+- clear the file of [`FASTA_TOADD_FILENAME`](fasta_toadd_filename--str-) 
 
 
 ### inner iteration over hmmsearch results
@@ -100,5 +100,5 @@ This loop works by calling next() on the generator to retrieve an identifier (an
 - find the value for pos_2c
 - get GO terms from uniprot
 - populate a dictionary `query_dict` with the values  
-- query the database with [`MAIN_QUERY`](MAIN_QUERY),`query_dict`, to insert info about the protein
-- check if this fasta had already been put in [`FASTA_TOADD_FILENAME`](FASTA_TOADD_FILENAME) and put it in if it hadn't.
+- query the database with [`MAIN_QUERY`](main_query--str),`query_dict`, to insert info about the protein
+- check if this fasta had already been put in [`FASTA_TOADD_FILENAME`](fasta_toadd_filename--str-) and put it in if it hadn't.
