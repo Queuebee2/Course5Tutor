@@ -170,7 +170,7 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
     """ hacky function to gather header + sequence by accession in a
         downloaded database file (zipped fasta)
 
-        """
+    """
     if verbose: print('trying to open gzip and find',accession)
     with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
         if verbose: print("welcome to excessive verbosityPrints ltd© ")
@@ -259,7 +259,7 @@ def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
         in goes a Uniprot object from bioservices along with a
         swissprot id and a list of expected columns
 
-        """
+    """
     print('trying to find GOTERMS for',accession)
     
     result = uniprot_handle.search(accession, columns=",".join(columns_list))
@@ -280,8 +280,8 @@ def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
     return column_value_dict
 
 
-def iterate_hmm_search_tab_results(filename=HMM_SEARCH_TAB_OUTPUT_FILENAME
-                                   , verbose=False):
+def iterate_hmm_search_tab_results(filename=HMM_SEARCH_TAB_OUTPUT_FILENAME,
+                                   verbose=False):
     """ GENERATOR!!!
         iterate over hmmsearch3 tab output using SearchIO.parse
 
