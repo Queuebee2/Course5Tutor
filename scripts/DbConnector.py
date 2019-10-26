@@ -131,18 +131,15 @@ class DbConnector():
         
         """
 
-        print('trying to exec', query, values)
-        self.cursor.execute(query, values)
-        self.connection.commit()
-        print(self.cursor.rowcount, 'record inserted')
-        # can't be implemented yet, default values haven't been established
-        # it's recommended to set default values on the database side 
-        # so the script doesn't haveto generate them for every missing value.
 
-        # extra:
-        # add another function to return string query from**kwargs
-        # this could be done like ``self.Query_id = blastresult[0]``
-
+        try:
+            self.cursor.execute(query, values)
+            self.connection.commit()
+        except Exception:
+            print("problem with inserting query",query,
+                  "with",values)
+            raise
+       
     def commit_query(self, query):
         """speaks for itself doesn't it"""
         try:
@@ -152,8 +149,8 @@ class DbConnector():
 
             print("exception occurred with query:")
             print(query)
-            exit()
-
+            raise
+    
     def insert_many_to_many(self, table_value_dict):
         """
         Insert data into a many-to-many relationship
