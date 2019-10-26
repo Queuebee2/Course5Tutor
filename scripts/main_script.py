@@ -452,7 +452,7 @@ def main():
     caughtMistakes = 0
 
 
-    while caughtMistakes[max(caughtMistakes)] < 5:
+    while caughtMistakes< 5:
         """ as long as there are no errorcounts over 5,
             retry this loop"""
         try:
