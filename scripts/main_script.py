@@ -93,12 +93,12 @@ def create_msa_mafft(fasta_filename=FASTA_FILENAME,
 
     # Check whether msa has already been made
     if os.path.isfile(msa_destination_filename):
-        pass
+        print("msa already exists, overwriting!")
     # Execute command if msa hasn't been made before
-    else:
-        cmd = "mafft " + fasta_filename + " > " + msa_destination_filename
-        e = subprocess.check_call(cmd, shell=True)
-        if verbose:  print(e)
+
+    cmd = "mafft " + fasta_filename + " > " + msa_destination_filename
+    e = subprocess.check_call(cmd, shell=True)
+    if verbose:  print(e)
     return
 
 def create_hmm(msa_filename=MSA_FILENAME,
@@ -119,12 +119,12 @@ def create_hmm(msa_filename=MSA_FILENAME,
 
     # Check whether hmm has already been made
     if os.path.isfile(hmm_destination_filename):
-        pass
+        print("hmm already exists, overwriting!")
     # Execute command if hmm hasn't been made before
-    else:
-        cmd = "hmmbuild " + hmm_destination_filename + " " + msa_filename
-        e = subprocess.check_call(cmd, shell=True)
-        if verbose:  print(e)
+
+    cmd = "hmmbuild " + hmm_destination_filename + " " + msa_filename
+    e = subprocess.check_call(cmd, shell=True)
+    if verbose:  print(e)
     return
 
 def do_hmm_search(hmm_filename=HMM_FILENAME,
@@ -172,7 +172,7 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE):
                 else:
                     # TODO MAKE CUSTOM EXCEPTION
                     raise Exception("seq not filled in"+\
-                        "fetch_fasta_from_local_zip_db"!)
+                        "fetch_fasta_from_local_zip_db!")
             
             if accession in line:
                 header = line.strip("\n")
@@ -291,7 +291,7 @@ def important_mainloop(verbose=True):
 
     # create uniprot handle object
     # todo: find out if 'handle' is the right terminology here
-    uniprot_handle = UniProt(verbose=False)
+    uniprot_handle = UniProt(verbose=True)
 
 
     # determine input file(s)
@@ -314,19 +314,27 @@ def important_mainloop(verbose=True):
         
         # msa
         
-        create_msa_mafft() ;if verbose: print("main: trying to create msa...")
+        create_msa_mafft()
+        if verbose: print("main: trying to create msa...")
 
         # hmm
-        create_hmm() ;if verbose: print("main: trying to create phmm...")
+        create_hmm()
+        if verbose: print("main: trying to create phmm...")
 
         # hmm search
-        do_hmm_search() ;if verbose: print("main: trying to do hmmsearch...")
+        do_hmm_search()
+        if verbose: print("main: trying to do hmmsearch...")
 #TODO
 
         # iterate hmm search results
         innerLoop = True
-
+        loopcount = 0
         while innerLoop:
+
+            if verbose:
+                if loopcount % 10 ==0:
+                    print('fasta files:', loopcount)
+                    
             identifier, evalue = iterate_hmm_search_tab_results()
 
             actual_id = identifier.split("|")[1]
@@ -353,12 +361,12 @@ def important_mainloop(verbose=True):
                         '{header}',
                         '{seq}',
                         {iteration},
-                        {GO_STUF_D['go(biological process)'},
-                        {GO_STUF_D['go(cellular component)'},
-                        {GO_STUF_D['go(molecular function)'},
+                        {GO_STUF_D['go(biological process)']},
+                        {GO_STUF_D['go(cellular component)']},
+                        {GO_STUF_D['go(molecular function)']},
                         {pos_2c});
                         """
-
+                
                 db.commit_query(query)
 
         #outofinnerloop
@@ -372,37 +380,41 @@ def important_mainloop(verbose=True):
 def main():
 
     # exceptions 
-    caughtMistakes = dict()
-    
-    try:
-        important_mainloop()
+    caughtMistakes = {"noerror":0}
 
-    # exceptions we know how to handle
-    #
-    # here.
 
-    # uknown exceptions
-    except Exception as SomeUknownException:
-        e = str(type(SomeUknownException))
-        
-        if str(e) in caughtMistakes:
-            caughtMistakes[e] += 1
+    while caughtMistakes[max(caughtMistakes)] < 5:
+        """ as long as there are no errorcounts over 5,
+            retry this loop"""
+        try:
+            important_mainloop()
+
+        # exceptions we know how to handle
+        #
+        # here.
+
+        # uknown exceptions
+        except Exception as SomeUknownException:
+            e = str(type(SomeUknownException))
             
-        else:
-            caughtMistakes[e] = 1
+            if str(e) in caughtMistakes:
+                caughtMistakes[e] += 1
+                
+            else:
+                caughtMistakes[e] = 1
 
-        if caughtMistakes[e] > 5:
+            if caughtMistakes[e] > 5:
 
-            print('too many exceptions caught of identical type')
-            break
+                print('too many exceptions caught of identical type')
+                
+                
+            sleep(1000)
             
-        sleep(1000)
-        
-    print(caughtMistakes)
+        print(caughtMistakes)
 
-    with open('logfile.log', 'a') as logfile:
-        for k, v in caughtMistakes.items():
-            logfile.write(k + "\t\t" + str(v) + "\n")
+        with open('logfile.log', 'a') as logfile:
+            for k, v in caughtMistakes.items():
+                logfile.write(k + "\t\t" + str(v) + "\n")
 
     
         
