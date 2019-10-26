@@ -429,9 +429,9 @@ def important_mainloop(verbose=1):
     running = True
 
     iteration = db.select_max_iteration()
-    if iteration < 0:
+    if iteration == None:
         iteration = 0
-    elif iteration == None:
+    elif iteration < 0:
         iteration = 0
     
     # 'running' loop
