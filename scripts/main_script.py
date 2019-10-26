@@ -336,11 +336,13 @@ def important_mainloop(verbose=True):
                     print('fasta files:', loopcount)
                     
             identifier, evalue = iterate_hmm_search_tab_results()
+            if verbose: print(identifier, evalue)
 
             actual_id = identifier.split("|")[1]
 
             # sql select to check if it exists in our db
             if db.exists_protein(actual_id):
+                if verbose: print('skipped', actual_id)
                 continue  # skip (doesnt check if other values filled though)
             else:
     
@@ -350,10 +352,18 @@ def important_mainloop(verbose=True):
 
                 # fetch header, fasta from local database
                 header, seq = fetch_fasta_from_local_zip_db(actual_id)
+                if verbose: print(header[:22], seq[:20])
 
+                # find pos_2c
                 pos_2c = find_target_pattern(seq)
+                if verbose: print('pos 2c:', pos_2c)
+                
                 GO_STUFF_D = get_uniprot_stuff(uniprot_handle, acession)
-                obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
+                if verbose:
+                    for k, v in GO_STUFF_D.items():
+                        print("GO:",k, v)
+        
+               # obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
                 
                 query = f"""INSERT INTO PROTEIN VALUES(
                         NULL,
