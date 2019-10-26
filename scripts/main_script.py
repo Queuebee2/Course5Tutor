@@ -428,6 +428,8 @@ def important_mainloop(verbose=1):
     # found
     running = True
     iteration = db.select_max_iteration()
+    if iteration < 0:
+        iteration = 0
     
     # 'running' loop
     while running:
