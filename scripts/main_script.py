@@ -71,7 +71,7 @@ def find_target_pattern(string ,verbose = True):
     if matches:
         match_amt = len(matches)
         if match_amt > 1:
-            if verbose: print("toomanny patterns error")
+            if verbose: print("TooManyError: too many patterns error")
             raise TooManyError
         elif match_amt == 1:
             match = matches[0]
@@ -384,12 +384,15 @@ def important_mainloop(verbose=True):
                 if verbose: print(header[:22], seq[:20])
 
                 # find pos_2c
-                pos_2c = find_target_pattern(seq)
+                try:
+                    pos_2c = find_target_pattern(seq)
                 
-                if pos:
-                    pos_2c = seq.index(pos_2c)
-                else:
-                    pos = -1
+                    if pos:
+                        pos_2c = seq.index(pos_2c)
+                    else:
+                        pos = -1
+                except TooManyError:
+                    pos_2c = -200
                     
                 if verbose: print('pos 2c:', pos_2c)
                 
