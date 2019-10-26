@@ -147,11 +147,12 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     """
 
     # Check whether hmm has already been made
-    if os.path.isfile(hmm_filename):
-        pass
+    if os.path.isfile(HMM_SEARCH_TAB_OUTPUT_FILENAME):
+        print("hmmsearchfile already exists, but i dont care")
     # Execute command if hmm hasn't been made before
     else:
         cmd = "hmmsearch {} {} {}".format(options,hmm_filename,fasta_database)
+        print('hmmsearching:',cmd)
         e = subprocess.check_call(cmd, shell=True)
         if verbose:  print(e)
     return
