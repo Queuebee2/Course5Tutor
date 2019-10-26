@@ -331,7 +331,7 @@ def important_mainloop(verbose=True):
     # having more than 50% of results be results we already
     # found
     running = True
-    iteration = selecx_max_iteration 
+    iteration = db.selecx_max_iteration()
     
     # 'running' loop
     while running:
@@ -449,7 +449,7 @@ def important_mainloop(verbose=True):
 def main():
 
     # exceptions 
-    caughtMistakes = {"noerror":0}
+    caughtMistakes = 0
 
 
     while caughtMistakes[max(caughtMistakes)] < 5:
@@ -472,19 +472,13 @@ def main():
             with open('logfile.log', 'a') as logfile:
                 logfile.write(e+"\n")
                 
-            if str(e) in caughtMistakes:
-                caughtMistakes[e] += 1
-            else:
-                caughtMistakes[e] = 1
-            if caughtMistakes[e] > 5:
-                print('too many exceptions caught of identical type')
 
-                
-            # sleep(1000)
+            if caughtMistakes > 5:
+                print('too many exceptions caught')
+
+            caughtMistakes = 0
             
-    print(caughtMistakes)
-        
-            
+   
         
 
     
