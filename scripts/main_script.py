@@ -235,7 +235,9 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
     if type(fasta_str) == str:
         # sometimes this dumb retrieve func returns just 1 string,
         # the fasta itself. This is the expected result
-        header, seq = fasta_str.split("\n")
+        header_seqlist = fasta_str.split("\n")
+        header = header_seqlist[0]
+        seq = header_seqlist[1]
         return header, seq
     
     elif type(fasta_str) == list:
