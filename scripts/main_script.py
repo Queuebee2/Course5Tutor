@@ -167,7 +167,7 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
 
 def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                                   verbose=True):
-    """ hacky function to gather header + sequence by acession in a
+    """ hacky function to gather header + sequence by accession in a
         downloaded database file (zipped fasta)
 
         """
@@ -206,14 +206,14 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                 
 
 # prolly not gonna use lol
-def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
+def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=False):
     """should return the header+sequence of a swissprot entry in
        fasta format, but otherwise lets you know it didn't.
 
     arguments
     uniprot_handle: bioservices.Uniprot object to execute the fetch
 
-    acession: str (preferrably), can be a list too. Let's keep it
+    accession: str (preferrably), can be a list too. Let's keep it
               the way bioservices had it made. very convenient.
 
     returns: str containing a fasta file for max 1 entry
@@ -225,8 +225,8 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
 
     
     """
-    fasta_str = uniprot_handle.retrieve(acession, frmt='fasta')
-    if verbose: print('got a fasta from', acession)
+    fasta_str = uniprot_handle.retrieve(accession, frmt='fasta')
+    if verbose: print('got a fasta from', accession)
     print(fasta_str)
     if type(fasta_str) == str:
         # sometimes this dumb retrieve func returns just 1 string,
@@ -235,36 +235,37 @@ def fetch_fasta_from_uniprot(uniprot_handle, acession, verbose=False):
     
     elif type(fasta_str) == list:
         # but then, sometimes, like if you accidentally were to give it 2
-        # acession identifiers, it would return a list of fasta strings.
+        # accession identifiers, it would return a list of fasta strings.
         raise TooManyError('fetch_fasta returned too many fasta strings!')
     
     elif (fasta_str == '404') or (fasta_str == 404):
         # then if an id returns a 404 page, it just returns '404'
         # so that's really convenient, too, yes.
-        raise InvalidIdError(str(acession) + " yields a 404 error!")
+        raise InvalidIdError(str(accession) + " yields a 404 error!")
 
     elif (fasta_str == '400') or (fasta_str == 400):
         # oh apparently something can cause it to return a 400 error too
-        raise InvalidIdError(str(acession) + " yields a 400 error!")
+        raise InvalidIdError(str(accession) + " yields a 400 error!")
     else:
         # gosh darnit
         raise UrgentUnknownError('type fasta_str:' + str(type(fasta_str)) +
-                                 ' acession id:' + str(acession))
+                                 ' accession id:' + str(accession))
 
 
 
-def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
-                      verbose=False):
+def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
+                      verbose=True):
     """ TODO DOCSTRING
         in goes a Uniprot object from bioservices along with a
         swissprot id and a list of expected columns
 
         """
+    print('trying to find GOTERMS for',accession)
     
-    result = uniprot_handle.search(acession, columns=",".join(columns_list))
+    result = uniprot_handle.search(accession, columns=",".join(columns_list))
 
     column_value_dict = dict()
-
+    
     for i, column in enumerate(columns_list):
         if verbose:
             print(i)
@@ -395,8 +396,9 @@ def important_mainloop(verbose=True):
                     pos_2c = -200
                     
                 if verbose: print('pos 2c:', pos_2c)
-                
-                GO_STUFF_D = get_uniprot_stuff(uniprot_handle, acession)
+
+                if verbose: print("looking up GO terms")
+                GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
                 if verbose:
                     for k, v in GO_STUFF_D.items():
                         print("GO:",k, v)
