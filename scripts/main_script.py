@@ -479,11 +479,11 @@ def important_mainloop(verbose=1):
                 header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
 
 
-            if "U" in seq or "u" in seq:
-                print(actual_id, 'contained an U')
-                quick_log(actual_id, 'contained an U')
-                continue
-        
+                if "U" in seq or "u" in seq:
+                    print(actual_id, 'contained an U')
+                    quick_log(actual_id, 'contained an U')
+                    continue
+            
 
     
                 # fetch header LOCALLY, fasta from local database
@@ -552,6 +552,7 @@ def important_mainloop(verbose=1):
                 
         #outofinnerloop
         iteration += 1
+        print(100*"GOING TO NEXT ITERATION")
         update_main_fasta()
         
         
