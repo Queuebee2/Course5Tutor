@@ -401,7 +401,7 @@ def quick_log(s):
         for symbol_or_string in s:
             # very ugly but now it handles lists with items too
             text += str(symbol_or_string)
-                logfile.write(text)
+        logfile.write(text)
                 
                 
                 
