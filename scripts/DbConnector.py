@@ -50,18 +50,30 @@ class DbConnector():
 #!TODO  add parameter to set table
         default_table = DEFAULT_TABLE
         
-        self.cursor.execute("SELECT * FROM " + default_table + " LIMIT " + str(limit) +";")
-
+        q = "SELECT * FROM " + default_table + " LIMIT " + str(limit) +";"
+        
+        self.cursor.execute(q)
         results = self.cursor.fetchall()
 
         return results
 
-    def exists(self, protein):
+    def exists_protein(self, acession, verbose=False):
 #!TODO  hardcode SELECT to check if a protein already exists
         # in our database based on duplicate sequence OR
         # sp/NP/PDB identifier....
         # not sure if/where/why needed.
-        pass
+        q = "SELECT * FROM PROTEIN WHERE `db_id` = '{}';".format(acession)
+        self.cursor.execute(q)
+        results = self.cursor.fetchall()
+
+        if verbose:
+            print(results)
+
+        if results:
+            return True
+        else:
+            return False
+        
 
 
     def update_row(self, table, ID, columns_values, verbose=False):
