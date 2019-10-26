@@ -289,12 +289,12 @@ def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
         if verbose:
             print(i)
             print(column, result.split("\n")[1].split("\t")[i-1])   #TODO FIX THIS UGLY THING
-            try:
-                value = result.split("\n")[1].split("\t")[i]
-            except IndexError:
-                value = None              
+        try:
+            value = result.split("\n")[1].split("\t")[i]
+        except IndexError:
+            value = None              
 
-            column_value_dict[column] = value
+        column_value_dict[column] = value
         
     return column_value_dict
 
