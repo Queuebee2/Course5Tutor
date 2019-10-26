@@ -398,7 +398,7 @@ def important_mainloop(verbose=True):
                 try:
                     pos_2c = find_target_pattern(seq)
                 
-                    if pos:
+                    if pos_2c:
                         pos_2c = seq.index(pos_2c)
                     else:
                         pos_2c = -1
