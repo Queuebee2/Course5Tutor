@@ -329,13 +329,15 @@ def important_mainloop(verbose=True):
         # iterate hmm search results
         innerLoop = True
         loopcount = 0
+
+        search_result_terator = iterate_hmm_search_tab_results()
         while innerLoop:
 
             if verbose:
                 if loopcount % 10 ==0:
                     print('fasta files:', loopcount)
-                    
-            identifier, evalue = iterate_hmm_search_tab_results()
+
+            identifier, evalue = next(search_result_terator)
             if verbose: print(identifier, evalue)
 
             actual_id = identifier.split("|")[1]
