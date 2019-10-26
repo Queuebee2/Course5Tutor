@@ -235,7 +235,8 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
     if type(fasta_str) == str:
         # sometimes this dumb retrieve func returns just 1 string,
         # the fasta itself. This is the expected result
-        return fasta_str
+        header, seq = fasta_str.split("\n")
+        return header, seq
     
     elif type(fasta_str) == list:
         # but then, sometimes, like if you accidentally were to give it 2
@@ -435,7 +436,7 @@ def important_mainloop(verbose=1):
             else:
                 if verbose:print(actual_id,'not in db, looking for header..')
                 
-                header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id).split("\n")
+                header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
 
     
                 # fetch header LOCALLY, fasta from local database
