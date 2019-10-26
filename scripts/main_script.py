@@ -441,10 +441,10 @@ def important_mainloop(verbose=1):
         search_result_terator = iterate_hmm_search_tab_results()
         
         for identifier, evalue in search_result_terator:
-
+            loopcount += 1
             if verbose:
                 if loopcount % 10 ==0:
-                    print('fasta files:', loopcount)
+                    print('fasta sequences looked at:', loopcount)
 
             
             if verbose: print('id:',identifier, 'eval:',evalue)
