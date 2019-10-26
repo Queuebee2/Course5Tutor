@@ -261,8 +261,14 @@ def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
 
     """
     print('trying to find GOTERMS for',accession)
-    
-    result = uniprot_handle.search(accession, columns=",".join(columns_list))
+
+    foundGO = False
+    while not foundGO:
+        if verbose: print("looking up GO terms")
+        result = uniprot_handle.search(accession, columns=",".join(columns_list))
+        if result:
+            foundGO = True
+        sleep(10)
 
     column_value_dict = dict()
     
