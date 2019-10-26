@@ -38,6 +38,19 @@ DEFAULT_SELECTION = ["go(biological process)","go(cellular component)",
 HMMSEARCH_OPTIONS = " --tblout " + HMM_SEARCH_TAB_OUTPUT_FILENAME + \
                     " --acc --noali "
 
+# mysql QUERY
+MAIN_QUERY = """INSERT INTO PROTEIN
+            VALUES(
+                %(id)s,
+                %(db_id)s,
+                %(header)s,
+                %(seq)s,
+                %(iteration)s,
+                %(GO_bio_process)s,
+                %(GO_cell_component)s,
+                %(GO_molecular_func)s,
+                %(pos_2c)s
+                )"""
 # custom errors
 class TooManyError(Exception):
     """When there's too much of something"""
@@ -402,7 +415,7 @@ def important_mainloop(verbose=1):
     # having more than 50% of results be results we already
     # found
     running = True
-    iteration = db.selecx_max_iteration()
+    iteration = db.select_max_iteration()
     
     # 'running' loop
     while running:
@@ -493,20 +506,21 @@ def important_mainloop(verbose=1):
                # obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
 
                 
-                query = f"""INSERT INTO PROTEIN VALUES(
-                        NULL,
-                        '{actual_id}',
-                        '{header}',
-                        '{seq}',
-                        {iteration},
-                        '{GO_STUFF_D['go(biological process)']}',
-                        '{GO_STUFF_D['go(cellular component)']}',
-                        '{GO_STUFF_D['go(molecular function)']}',
-                        {pos_2c});
-                        """
+                query_dict = {'id':None, #autoincrement
+                              'db_id':actual_id,
+                              'header':header,
+                              'seq':seq,
+                              'iteration': iteration,
+                              'GO_bio_process':GO_STUF_D['go(biological process)'],
+                              'GO_cell_component':GO_STUF_D['go(cellular component)'],
+                              'GO_molecular_func':GO_STUF_D['go(molecular function)'],
+                              'pos_2c':pos_2c}
                 
-                db.commit_query(query)
-                if verbose > 1 : print('queried ', query)
+                db.insert(MAIN_QUERY, query_dict)
+                if verbose > 1 :
+                    print("query values:")
+                    for k,v in query_dict.items():
+                        print(str(k)[:15],"\t",str(v)[:15])
 
                 if not in_fasta(actual_id) and not in_fasta(actual_id, FASTA_TOADD_FILENAME):
                     add_to_temp(header)
