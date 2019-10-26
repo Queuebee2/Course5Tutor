@@ -371,6 +371,10 @@ def update_main_fasta():
 
         out.write(header)
         out.write(seq)
+
+    with open(FASTA_TOADD_FILENAME, 'w') as clearfile:
+        #clears entire contents of file if im right
+        pass
     
 def important_mainloop(verbose=1):
     # todo set verbose default to False again one day or another im gonna find ya im gonna getcha getcha getcha getcha
@@ -507,6 +511,7 @@ def important_mainloop(verbose=1):
         #outofinnerloop
         iteration += 1
         update_main_fasta()
+        
         
 
                     
