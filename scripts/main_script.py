@@ -219,6 +219,11 @@ def get_uniprot_stuff(uniprot_handle, acession, columns_list=DEFAULT_SELECTION,
     return column_value_dict
 
 
+def iterate_hmm_search_tab_results(filename, verbose=False):
+    """ iterate over hmmsearch3 tab output using SearchIO.parse
+
+    """
+    
 def make_obscure_SQL_part(d):
     """ takes a dictionary and puts the value in the right order
         based on the order of keys in the database
