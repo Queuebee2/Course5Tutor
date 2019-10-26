@@ -304,7 +304,10 @@ def important_mainloop(verbose=True):
     # having more than 50% of results be results we already
     # found
     running = True
-    iteration = 0 # TODO function to get iteration from db
+    iteration = 0 # TODO function to get highest iteration from db
+                  # and then we should actually check if
+                  # the current file we're working on
+                  # has been finished before increasing it
     
     # 'running' loop
     while running:
@@ -343,7 +346,7 @@ def important_mainloop(verbose=True):
                 pos_2c = find_target_pattern(seq)
                 GO_STUFF_D = get_uniprot_stuff(uniprot_handle, acession)
                 obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
-                query_dict = {"id":
+                
                 query = f"""INSERT INTO PROTEIN VALUES(
                         NULL,
                         '{actual_id}',
@@ -358,6 +361,11 @@ def important_mainloop(verbose=True):
 
                 db.commit_query(query)
 
+        #outofinnerloop
+        iteration += 1
+
+                    
+        
         
         # repeat?
     
