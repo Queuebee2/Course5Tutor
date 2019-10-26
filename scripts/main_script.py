@@ -165,7 +165,10 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE):
     with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
         header = ''
         seq = ''
+        lines = 0
         for line in db_as_zipfile:
+            if lines % 250000 == 0:
+                print('looked through', lines,'lines for',accession)
             if line.startswith(">") and header != '':
                 print(header, "\n",seq)
                 if seq != '':
@@ -339,16 +342,17 @@ def important_mainloop(verbose=True):
                     print('fasta files:', loopcount)
 
             identifier, evalue = next(search_result_terator)
-            if verbose: print(identifier, evalue)
+            if verbose: print('id:',identifier, 'eval:',evalue)
 
             actual_id = identifier.split("|")[1]
+
 
             # sql select to check if it exists in our db
             if db.exists_protein(actual_id):
                 if verbose: print('skipped', actual_id)
                 continue  # skip (doesnt check if other values filled though)
             else:
-    
+                if verbose:print(actual_id,'not in db, looking for hdr')
                 # deprecated as we have a local database now
                 # fetch_fasta_from_uniprot(uniprot_handle, acession)
 
@@ -367,6 +371,7 @@ def important_mainloop(verbose=True):
                         print("GO:",k, v)
         
                # obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
+
                 
                 query = f"""INSERT INTO PROTEIN VALUES(
                         NULL,
@@ -381,7 +386,7 @@ def important_mainloop(verbose=True):
                         """
                 
                 db.commit_query(query)
-
+                if verbose: print('queried ', query)
         #outofinnerloop
         iteration += 1
 
