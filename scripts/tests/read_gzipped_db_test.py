@@ -22,7 +22,7 @@ with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
         if len(seqio_record) > ma:
             ma = len(seqio_record.id)
 
-        if i % 1000000 = 0:
+        if i % 1000000 == 0:
             print(i)
 
 print(mi, ma)
