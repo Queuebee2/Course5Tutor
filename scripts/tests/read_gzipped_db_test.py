@@ -16,5 +16,6 @@ with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
     for seqio_record in SeqIO.parse(db_as_zipfile, "fasta"):
         if testcount < 10:
             print(seqio_record.id)
-        
-        
+
+        # i literally forgot this how dumb can I be
+        testcount += 1        
