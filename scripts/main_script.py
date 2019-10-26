@@ -162,7 +162,9 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                                   verbose=True):
     """ hacky function to gather header + sequence by acession in a
         downloaded database file (zipped fasta)
+
         """
+    if verbose: print('trying to open gzip and find',accession)
     with gzip.open(gzip_db_location, 'rt') as db_as_zipfile:
         if verbose: print("welcome to excessive verbosityPrints ltd© ")
         header = ''
