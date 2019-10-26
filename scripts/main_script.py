@@ -228,7 +228,6 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
     print("looking for fasta for", accession)
     fasta_str = uniprot_handle.retrieve(accession, frmt='fasta')
     if verbose: print('got a fasta from', accession)
-    print(fasta_str)
     if type(fasta_str) == str:
         # sometimes this dumb retrieve func returns just 1 string,
         # the fasta itself. This is the expected result
@@ -237,18 +236,24 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
     elif type(fasta_str) == list:
         # but then, sometimes, like if you accidentally were to give it 2
         # accession identifiers, it would return a list of fasta strings.
+        print('fetch_fasta returned too many fasta strings!')
         raise TooManyError('fetch_fasta returned too many fasta strings!')
     
     elif (fasta_str == '404') or (fasta_str == 404):
         # then if an id returns a 404 page, it just returns '404'
         # so that's really convenient, too, yes.
+        print(str(accession) + " yields a 404 error!")
         raise InvalidIdError(str(accession) + " yields a 404 error!")
+        
 
     elif (fasta_str == '400') or (fasta_str == 400):
         # oh apparently something can cause it to return a 400 error too
+        print(str(accession) + " yields a 400 error!")
         raise InvalidIdError(str(accession) + " yields a 400 error!")
     else:
         # gosh darnit
+        print('UrgentUnknownError:','type fasta_str:' + str(type(fasta_str)) +
+                                 ' accession id:' + str(accession))
         raise UrgentUnknownError('type fasta_str:' + str(type(fasta_str)) +
                                  ' accession id:' + str(accession))
 
@@ -395,7 +400,7 @@ def important_mainloop(verbose=True):
                     if pos:
                         pos_2c = seq.index(pos_2c)
                     else:
-                        pos = -1
+                        pos_2c = -1
                 except TooManyError:
                     pos_2c = -200
                     
