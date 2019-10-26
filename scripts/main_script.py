@@ -409,7 +409,7 @@ def important_mainloop(verbose=True):
                 while not foundGO:
                     if verbose: print("looking up GO terms")
                     try:
-                        GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
+                        GO_STUFF_D = get_uniprot_stuff(uniprot_handle, actual_id)
                     except Exception as e:
                         print(e)
                         print("TODO FIGURE OUT HOW TO ENABLE ALL DEBUFGPRINTS$RITW")
@@ -465,6 +465,7 @@ def main():
 
         # uknown exceptions
         except Exception as SomeUknownException:
+            print("there was a horrible exception!")
             e = str(type(SomeUknownException))
             
             if str(e) in caughtMistakes:
