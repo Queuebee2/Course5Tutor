@@ -44,7 +44,7 @@ class DbConnector():
         self._connect()
     
 
-    def selecx_max_iteration(self):
+    def select_max_iteration(self):
         """ literally select max(iteration) from Protein;
         should return an int
         """
