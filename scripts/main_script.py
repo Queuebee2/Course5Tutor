@@ -350,7 +350,7 @@ def add_to_temp(lines):
     with open(FASTA_TOADD_FILENAME, 'a') as out:
         out.write(lines + "\n")
 
-def update_main_fasta()
+def update_main_fasta():
     with open(MAIN_FASTA_FILENAME, 'a') as out:
         out.write("\n") # to be sure
         with open(FASTA_TOADD_FILENAME, 'r') as infile:
