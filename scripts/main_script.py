@@ -427,8 +427,8 @@ def important_mainloop(verbose=1):
     # having more than 50% of results be results we already
     # found
     running = True
-    try:
-        iteration = db.select_max_iteration()
+
+    iteration = db.select_max_iteration()
     if iteration < 0:
         iteration = 0
     elif iteration == None:
