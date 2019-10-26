@@ -145,8 +145,14 @@ class DbConnector():
 
     def commit_query(self, query):
         """speaks for itself doesn't it"""
-        self.cursor.execute(query)
-        self.connection.commit()
+        try:
+            self.cursor.execute(query)
+            self.connection.commit()
+        except Exception:
+
+            print("exception occurred with query:")
+            print(query)
+            exit()
 
     def insert_many_to_many(self, table_value_dict):
         """
