@@ -54,7 +54,7 @@ class UrgentUnknownError(Exception):
 
 
 # helper functions
-def find_target_pattern(string):
+def find_target_pattern(string ,verbose = True):
     """ Uses a regex object to find all occurences of
         a pattern within a string.
 
@@ -63,18 +63,25 @@ def find_target_pattern(string):
 
         An error will be raised when more than 1 match is found
     """
+    #TODO SET VERBOSE OFF AGAIN
     # set TARGET_PATTERN as global re.compile('regexstring')
+    if verbose: print("finding matches")
     matches = TARGET_PATTERN.findall(string)
    
     if matches:
         match_amt = len(matches)
         if match_amt > 1:
+            if verbose: print("toomanny patterns error")
             raise TooManyError
         elif match_amt == 1:
             match = matches[0]
+            if verbose: print("found",match)
             return match
     else:
+        if verbose: print("there aren't any matches!")
         return None
+
+    print(20*"something funny happened")
         
 def create_msa_mafft(fasta_filename=FASTA_FILENAME,
                      msa_destination_filename=MSA_FILENAME, verbose=False):
@@ -337,13 +344,14 @@ def important_mainloop(verbose=True):
         # hmm search
         do_hmm_search()
         if verbose: print("main: trying to do hmmsearch...")
-#TODO
+
 
         # iterate hmm search results
         innerLoop = True
         loopcount = 0
 
         search_result_terator = iterate_hmm_search_tab_results()
+        
         while innerLoop:
 
             if verbose:
@@ -377,6 +385,12 @@ def important_mainloop(verbose=True):
 
                 # find pos_2c
                 pos_2c = find_target_pattern(seq)
+                
+                if pos:
+                    pos_2c = seq.index(pos_2c)
+                else:
+                    pos = -1
+                    
                 if verbose: print('pos 2c:', pos_2c)
                 
                 GO_STUFF_D = get_uniprot_stuff(uniprot_handle, acession)
@@ -393,9 +407,9 @@ def important_mainloop(verbose=True):
                         '{header}',
                         '{seq}',
                         {iteration},
-                        {GO_STUF_D['go(biological process)']},
-                        {GO_STUF_D['go(cellular component)']},
-                        {GO_STUF_D['go(molecular function)']},
+                        '{GO_STUF_D['go(biological process)']}',
+                        '{GO_STUF_D['go(cellular component)']}',
+                        '{GO_STUF_D['go(molecular function)']}',
                         {pos_2c});
                         """
                 
