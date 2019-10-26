@@ -1,6 +1,8 @@
 from sys import argv
 import subprocess
+import os
 import os.path
+
 import re
 import gzip
 from time import sleep
@@ -17,7 +19,8 @@ TARGET_PATTERN = re.compile('[C]..[C]')
 
 # entry-point filenames
 FASTA_DATABASE = '/home/queue/SwissProt/uniprot_sprot.fasta.gz'#must be zip.gz!
-FASTA_FILENAME = 'in_data/uniprot_seqs_rev.fasta.fasta'
+MAIN_FASTA_FILENAME = 'in_data/uniprot_seqs_rev.fasta.fasta'
+FASTA_TOADD_FILENAME = 'this_iteration_fastas_to_add.fasta'
 
 # temp filename
 MSA_FILENAME = 'msa.msa'
@@ -84,13 +87,13 @@ def find_target_pattern(string ,verbose = True):
 
     print(20*"something funny happened")
         
-def create_msa_mafft(fasta_filename=FASTA_FILENAME,
+def create_msa_mafft(MAIN_FASTA_FILENAME=MAIN_FASTA_FILENAME,
                      msa_destination_filename=MSA_FILENAME, verbose=False):
     """calls 'mafft' through the shell to create a
        multiple sequence alignment (msa_filename)
 
     ARGS:
-        fasta_filename: string
+        MAIN_FASTA_FILENAME: string
             relative path (just a filename) of a file containing fasta
             sequences to be aligned
 
@@ -104,7 +107,7 @@ def create_msa_mafft(fasta_filename=FASTA_FILENAME,
         print("msa already exists, overwriting!")
     # Execute command if msa hasn't been made before
 
-    cmd = "mafft " + fasta_filename + " > " + msa_destination_filename
+    cmd = "mafft " + MAIN_FASTA_FILENAME + " > " + msa_destination_filename
     e = subprocess.check_call(cmd, shell=True)
     if verbose:  print(e)
     return
@@ -316,7 +319,57 @@ def make_obscure_SQL_part(d):
     return "'" + "','".join([d[k] for k in keys_in_order]) + "'"
         
 
-def important_mainloop(verbose=True):
+def merge_fasta(to_add, main_file):
+
+    # todo
+
+    # make temp file
+
+    # iterate over to_add
+
+    # check if any header:sequence exists in main_file
+
+        # if not, add it to temp
+
+        # else, skip
+
+    # write whole main_file to temp and rename it
+    # OR add all temp_file lines to main_file.
+    
+    pass
+
+
+def in_fasta(accession,fastafile=MAIN_FASTA_FILENAME):
+    with open(fastafile, 'r') as f:
+        for line in f:
+            if accession in f:
+                return True
+    return False
+
+def add_to_temp(lines):
+    with open(FASTA_TOADD_FILENAME, 'a') as out:
+        out.write(lines + "\n")
+
+def update_main_fasta()
+    with open(MAIN_FASTA_FILENAME, 'a') as out:
+        out.write("\n") # to be sure
+        with open(FASTA_TOADD_FILENAME, 'r') as infile:
+            header = ''
+            seq =''
+            for line in infile:
+                if line.startswith(">"):
+                    if header != '':
+                        out.write(header)
+                        out.write(seq)
+                    header = line
+                    seq = ''
+                else:
+                    seq += line
+
+        out.write(header)
+        out.write(seq)
+    
+def important_mainloop(verbose=1):
     # todo set verbose default to False again one day or another im gonna find ya im gonna getcha getcha getcha getcha
 
     # create an object to handle communications with mySQL database
@@ -381,17 +434,15 @@ def important_mainloop(verbose=True):
                 continue  # skip (doesnt check if other values filled though)
             else:
                 if verbose:print(actual_id,'not in db, looking for header..')
-
-
-                  # """deprecated comment ;deprecated as we have a local database now"""
                 
-                seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
-                header = "noheader lol"
+                header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id).split("\n")
 
-
-                # fetch header, fasta from local database
+    
+                # fetch header LOCALLY, fasta from local database
                 # NEVERMIND WE DEPRECATE THIS ONE SINCE ITS NOT WORKING
-                #header, seq = fetch_fasta_from_local_zip_db(actual_id)
+                # header, seq = fetch_fasta_from_local_zip_db(actual_id)
+
+                
                 if verbose: print(header[:22], seq[:20])
 
                 # find pos_2c
@@ -424,7 +475,7 @@ def important_mainloop(verbose=True):
                     #print('zzzzz')
                     #sleep(10)
                     
-                if verbose:
+                if verbose > 1:
                     for k, v in GO_STUFF_D.items():
                         print("GO:",k, v)
         
@@ -444,9 +495,16 @@ def important_mainloop(verbose=True):
                         """
                 
                 db.commit_query(query)
-                if verbose: print('queried ', query)
+                if verbose > 1 : print('queried ', query)
+
+                if not in_fasta(actual_id) and not in_fasta(FASTA_TOADD_FILENAME, actual_id):
+                    add_to_temp(header)
+                    add_to_temp(seq)
+                
         #outofinnerloop
         iteration += 1
+        update_main_fasta()
+        
 
                     
         
