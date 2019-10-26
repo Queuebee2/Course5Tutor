@@ -397,8 +397,17 @@ def important_mainloop(verbose=True):
                     
                 if verbose: print('pos 2c:', pos_2c)
 
-                if verbose: print("looking up GO terms")
-                GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
+                
+
+                foundGO=False
+                while not foundGO:
+                    if verbose: print("looking up GO terms")
+                    GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
+                    if GO_STUFF_D:
+                        foundGO = True
+                    print('zzzzz')
+                    sleep(10)
+                    
                 if verbose:
                     for k, v in GO_STUFF_D.items():
                         print("GO:",k, v)
