@@ -478,7 +478,7 @@ def main():
             print("Unknown except:",SomeUnknownException)
             
             with open('logfile.log', 'a') as logfile:
-                logfile.write(e+"\t"+traceback.format_exc()"\n")
+                logfile.write(e+"\t"+traceback.format_exc()+"\n")
                 
 
             if caughtMistakes > 5:
