@@ -4,6 +4,7 @@ import os.path
 import re
 import gzip
 from time import sleep
+import traceback
 
 from Bio import SearchIO
 from bioservices import UniProt
@@ -473,16 +474,17 @@ def main():
             print("there was a horrible exception!")
             e = str(type(SomeUnknownException))
             print("Error str:",e)
+            print("traceback:",traceback.format_exc())
             print("Unknown except:",SomeUnknownException)
             
             with open('logfile.log', 'a') as logfile:
-                logfile.write(e+"\n")
+                logfile.write(e+"\t"+traceback.format_exc()"\n")
                 
 
             if caughtMistakes > 5:
                 print('too many exceptions caught')
 
-            caughtMistakes = 0
+            caughtMistakes +=1
             
    
         
