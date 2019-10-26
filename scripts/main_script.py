@@ -267,7 +267,7 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
 
 
 def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
-                      verbose=True):
+                      verbose=0):
     """ TODO DOCSTRING
         in goes a Uniprot object from bioservices along with a
         swissprot id and a list of expected columns
@@ -342,7 +342,7 @@ def merge_fasta(to_add, main_file):
     pass
 
 
-def in_fasta(accession,fastafile=MAIN_FASTA_FILENAME):
+def in_fasta(accession, fastafile=MAIN_FASTA_FILENAME):
     with open(fastafile, 'r') as f:
         for line in f:
             if accession in f:
@@ -500,7 +500,7 @@ def important_mainloop(verbose=1):
                 db.commit_query(query)
                 if verbose > 1 : print('queried ', query)
 
-                if not in_fasta(actual_id) and not in_fasta(FASTA_TOADD_FILENAME, actual_id):
+                if not in_fasta(actual_id) and not in_fasta(actual_id, FASTA_TOADD_FILENAME):
                     add_to_temp(header)
                     add_to_temp(seq)
                 
