@@ -206,7 +206,7 @@ def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                 
 
 # prolly not gonna use lol
-def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=False):
+def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=True):
     """should return the header+sequence of a swissprot entry in
        fasta format, but otherwise lets you know it didn't.
 
@@ -225,6 +225,7 @@ def fetch_fasta_from_uniprot(uniprot_handle, accession, verbose=False):
 
     
     """
+    print("looking for fasta for", accession)
     fasta_str = uniprot_handle.retrieve(accession, frmt='fasta')
     if verbose: print('got a fasta from', accession)
     print(fasta_str)
