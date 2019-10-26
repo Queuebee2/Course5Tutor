@@ -408,7 +408,11 @@ def important_mainloop(verbose=True):
                 foundGO=False
                 while not foundGO:
                     if verbose: print("looking up GO terms")
-                    GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
+                    try:
+                        GO_STUFF_D = get_uniprot_stuff(uniprot_handle, accession)
+                    except Exception as e:
+                        print(e)
+                        print("TODO FIGURE OUT HOW TO ENABLE ALL DEBUFGPRINTS$RITW")
                     if GO_STUFF_D:
                         foundGO = True
                     print('zzzzz')
