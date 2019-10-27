@@ -49,7 +49,7 @@ MAIN_QUERY = """INSERT INTO PROTEIN
                 %(GO_bio_process)s,
                 %(GO_cell_component)s,
                 %(GO_molecular_func)s,
-                %(pos_2c)s
+                %(target_pattern)s
                 )"""
 # custom errors
 class TooManyError(Exception):
@@ -402,8 +402,60 @@ def quick_log(*args):
             # very ugly but now it handles lists with items too
             text += str(symbol_or_string)
         logfile.write(text)
+
+
+def get_target_pattern(seq):
+    """ handles weird cases from find_target_pattern
+        -1 indicates no target pattern
+        -200 indicates two or more target pattern
+
+    TODO FIXMEUP
+        """
+    try:
+        target_pattern = find_target_pattern(seq)
                 
-                
+        if target_pattern:
+            target_pattern = seq.index(target_pattern)
+        else:
+            target_pattern = -1
+    except TooManyError:
+        target_pattern = -200
+        
+    return target_pattern
+
+
+def lookup_GO_terms(uniprot_handle, actual_id):
+    """handles weird cases from get_uniprot_stuff"""
+    dictionary_GO_terms = None
+    
+    while not dictionary_GO_terms:
+        if verbose: print("looking up GO terms for",actual_id)
+        try:
+            dictionary_GO_terms = get_uniprot_stuff(uniprot_handle, actual_id)
+        except Exception as e:
+            raise
+        
+    return dictionary_GO_terms
+
+        
+def fill_from_fasta():
+    """ fill the database with data from a fasta file"""
+    #unused
+    #useme
+    #makeme
+    with open(MAIN_FASTA_FILENAME, 'r') as file:
+        header = ''
+        seq =''
+        for line in infile:
+            if line.startswith(">"):
+                if header != '':
+                    out.write(header)
+                    out.write(seq)
+                header = line
+                seq = ''
+            else:
+                seq += line
+     
                 
 def important_mainloop(verbose=1):
     # todo set verbose default to False again one day or another im gonna find ya im gonna getcha getcha getcha getcha
@@ -477,68 +529,40 @@ def important_mainloop(verbose=1):
                 if verbose:print(actual_id,'not in db, looking for header..')
                 
                 header, seq = fetch_fasta_from_uniprot(uniprot_handle, actual_id)
+                if verbose: print(header[:22], seq[:20])
 
-
+                # for now, add the id of fastas with "u/U" in seq to log
                 if "U" in seq or "u" in seq:
                     print(actual_id, 'contained an U')
                     quick_log(actual_id, 'contained an U')
                     continue
-            
-
-    
-                # fetch header LOCALLY, fasta from local database
-                # NEVERMIND WE DEPRECATE THIS ONE SINCE ITS NOT WORKING
-                # header, seq = fetch_fasta_from_local_zip_db(actual_id)
-
                 
-                if verbose: print(header[:22], seq[:20])
-
-                # find pos_2c
-                try:
-                    pos_2c = find_target_pattern(seq)
-                
-                    if pos_2c:
-                        pos_2c = seq.index(pos_2c)
-                    else:
-                        pos_2c = -1
-                except TooManyError:
-                    pos_2c = -200
-                    
-                if verbose: print('pos 2c:', pos_2c)
-
-                
-
-                foundGO=False
-                while not foundGO:
-                    if verbose: print("looking up GO terms")
-                    try:
-                        GO_STUFF_D = get_uniprot_stuff(uniprot_handle, actual_id)
-                    except Exception as e:
-                        print(e)
-                        print("TODO FIGURE OUT HOW TO ENABLE ALL DEBUFGPRINTS$RITW")
-                    if GO_STUFF_D:
-                        
-                        foundGO = True
-                        
-                    #print('zzzzz')
-                    #sleep(10)
+                # get GO terms from uniprot
+                dictionary_GO_terms = lookup_GO_terms(uniprot_handle, actual_id)
                     
                 if verbose > 1:
-                    for k, v in GO_STUFF_D.items():
+                    for k, v in dictionary_GO_terms.items():
                         print("GO:",k, v)
-        
-               # obscure_GO_stuff = make_obscure_SQL_part(GO_STUFF_D)
+                
+    
 
                 
+                
+
+                # find target_pattern
+                target_pattern_pos = get_target_pattern(seq) 
+                if verbose: print('pos 2c:', target_pattern_pos)
+
+
                 query_dict = {'id':None, #autoincrement
                               'db_id':actual_id,
                               'header':header,
                               'seq':seq,
                               'iteration': iteration,
-                              'GO_bio_process':GO_STUFF_D['go(biological process)'],
-                              'GO_cell_component':GO_STUFF_D['go(cellular component)'],
-                              'GO_molecular_func':GO_STUFF_D['go(molecular function)'],
-                              'pos_2c':pos_2c}
+                              'GO_bio_process':dictionary_GO_terms['go(biological process)'],
+                              'GO_cell_component':dictionary_GO_terms['go(cellular component)'],
+                              'GO_molecular_func':dictionary_GO_terms['go(molecular function)'],
+                              'target_pattern':target_pattern_pos}
                 
                 db.insert(MAIN_QUERY, query_dict)
                 if verbose > 1 :
