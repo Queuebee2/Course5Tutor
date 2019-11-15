@@ -190,7 +190,6 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     return
 
 
-# yeah, not used
 def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                                   verbose=True):
     """ hacky function to gather header + sequence by accession in a
@@ -293,9 +292,6 @@ def get_uniprot_stuff(uniprot_handle, accession, columns_list=DEFAULT_SELECTION,
         in goes a Uniprot object from bioservices along with a
         swissprot id and a list of expected columns
 
-        out goes a hashmap/dict with GOclassNames as keys and all GO terms as a long
-        string as their value.
-
     """
     print('trying to find GOTERMS for', accession)
 
@@ -333,12 +329,11 @@ def iterate_hmm_search_tab_results(filename=HMM_SEARCH_TAB_OUTPUT_FILENAME,
         Bio.< ? ? >.Hit.evalue
 
     """
-    result = next(SearchIO.parse(filename, 'hmmer3-tab')) #obscure af
+    result = next(SearchIO.parse(filename, 'hmmer3-tab'))
     for hit in result.hits:
         yield hit.id, hit.evalue
 
 
-# not used. but it was a nice idea that I liked.
 def make_obscure_SQL_part(d):
     """ takes a dictionary and puts the value in the right order
         based on the order of keys in the database
@@ -347,15 +342,26 @@ def make_obscure_SQL_part(d):
     return "'" + "','".join([d[k] for k in keys_in_order]) + "'"
 
 
+def merge_fasta(to_add, main_file):
+    # todo
+
+    # make temp file
+
+    # iterate over to_add
+
+    # check if any header:sequence exists in main_file
+
+    # if not, add it to temp
+
+    # else, skip
+
+    # write whole main_file to temp and rename it
+    # OR add all temp_file lines to main_file.
+
+    pass
+
 
 def in_fasta(accession, fastafile=MAIN_FASTA_FILENAME):
-    """ Tests if an accession code already present in any line
-        in a fasta file.
-        Very rough. If by some weird reason any other part
-        of a header or even a sequence equals the accession this
-        will return true. very dangerous very non-regexy.
-        
-    """
     if not os.path.isfile(MAIN_FASTA_FILENAME):
         with open(fastafile, 'w') as createfile:
             pass
@@ -368,20 +374,11 @@ def in_fasta(accession, fastafile=MAIN_FASTA_FILENAME):
 
 
 def add_to_temp(lines):
-    """ adds an entry to a temporary file that will later
-        be merged to the initial dataset when the whole iteration finishes
-        This to prevent the initial dataset from growing without an iteration
-        finishing completely.
-    """
     with open(FASTA_TOADD_FILENAME, 'a') as out:
         out.write(lines + "\n")
 
 
 def update_main_fasta():
-    """ adds all entries from the FASTA_TOADD_FILENAME file
-        to the MAIN_FASTA_FILENAME file and wipes the TOADD one
-        for the next batch.
-    """
     with open(MAIN_FASTA_FILENAME, 'a') as out:
         out.write("\n")  # to be sure
         with open(FASTA_TOADD_FILENAME, 'r') as infile:
@@ -469,39 +466,9 @@ def fill_from_fasta():
                 seq += line
 
 
-class HomologFinder():
-
-    """ whatever I don't have time for this """
-
-    def __init__(self, verbosity=False):
-        self.verbosity = verbosity
-        self.db = DbConnector()
-        self.connect_uniprot()
-        self.running = True
-
-        iteration = self.get_max_iteration()
-
-    def connect_uniprot(self):
-        """create a bioservice connection with Uniprot"""
-        self.uniprot_handle = Uniprot(verbose=self.verbosity)
-        return
-
-    def get_max_iteration(self):
-        """Queries the database to see what iteration we were at
-           DbConnector returns SELECT max(iteration) FROM protein;
-           if it returns None (no entries) or negative (test entries)
-           iterations will be set to 0 by default.
-        """
-        iteration = db.select_max_iteration()
-        if (iteration == None) or (teration < 0) :
-           self.iteration = 0
-        return
-
-    
-    
-
-def important_mainloop(verbose=1):
-
+if __name__ == "__main__":
+    """ Main prorgam flow """
+    print('running from main')
     # todo set verbose default to False again one day or another im gonna find ya im gonna getcha getcha getcha getcha
 
     # create an object to handle communications with mySQL database
@@ -586,6 +553,8 @@ def important_mainloop(verbose=1):
                 target_pattern_pos = get_target_pattern(seq)
                 if verbose: print('pos 2c:', target_pattern_pos)
 
+                # fill in the query dictionary before passing it
+                # I think that's pythonic correct me if im bad
                 query_dict = {'id': None,  # autoincrement
                               'db_id': actual_id,
                               'header': header,
@@ -613,38 +582,6 @@ def important_mainloop(verbose=1):
 
         # repeat?
 
+else:
+    print("why are you importing main_script?")
 
-def main():
-    # exceptions
-    caughtMistakes = 0
-
-    while caughtMistakes < 5:
-        """ as long as there are no errorcounts over 5,
-            retry this loop"""
-        try:
-            important_mainloop()
-
-        # exceptions we know how to handle
-        #
-        # here.
-
-        # uknown exceptions
-        except Exception as SomeUnknownException:
-            print("there was a horrible exception!")
-            e = str(type(SomeUnknownException))
-            print("Error str:", e)
-            print("traceback:", traceback.format_exc())
-            print("Unknown except:", SomeUnknownException)
-
-            with open('logfile.log', 'a') as logfile:
-                logfile.write(e + "\t" + traceback.format_exc() + "\n")
-
-            if caughtMistakes > 5:
-                print('too many exceptions caught')
-
-            caughtMistakes += 1
-
-
-if __name__ == "__main__":
-    print('running from main')
-    main()
