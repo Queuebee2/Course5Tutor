@@ -190,6 +190,7 @@ def do_hmm_search(hmm_filename=HMM_FILENAME,
     return
 
 
+# yeah, not used
 def fetch_fasta_from_local_zip_db(accession, local_zip_db_name=FASTA_DATABASE,
                                   verbose=True):
     """ hacky function to gather header + sequence by accession in a
